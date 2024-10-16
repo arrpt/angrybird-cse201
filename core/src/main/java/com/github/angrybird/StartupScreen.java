@@ -21,7 +21,7 @@ public class StartupScreen implements Screen {
     @Override
     public void show() {
         bgmusic = Gdx.audio.newMusic(Gdx.files.internal("intro.mp3"));
-        bgimage = new Texture("angrybirdsintro.jpg"); // credits - https://www.deviantart.com/krimadraws/art/Angry-Birds-Splash-screen-but-even-more-Classic-916194469
+        bgimage = new Texture("angrybirdsintro2.png"); // credits - https://www.deviantart.com/krimadraws/art/Angry-Birds-Splash-screen-but-even-more-Classic-916194469
     }
 
     @Override
@@ -29,7 +29,7 @@ public class StartupScreen implements Screen {
         bgmusic.play();
         ScreenUtils.clear(Color.BLACK);
         game.batch.begin();
-        game.batch.draw(bgimage, 0, 0, 640, 480);
+        game.batch.draw(bgimage, 0, 0, 1280, 720);
         game.batch.end();
     }
 

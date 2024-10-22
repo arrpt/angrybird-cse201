@@ -20,6 +20,10 @@ public class Level1Screen implements Screen {
     private Texture red1;
     private Texture yellow1;
     private Texture bigRed1;
+    private Texture vstone1;
+    private Texture vwood1;
+    private Texture hglass1;
+    private Texture pig1;
 
 
     public Level1Screen(Main game){
@@ -40,8 +44,10 @@ public class Level1Screen implements Screen {
         red1 = new Texture("red1.png");
         yellow1 = new Texture("yellow1.png");
         bigRed1 = new Texture("bigred1.png");
-
-
+        vstone1 = new Texture("vstone1.png");
+        vwood1 = new Texture("vwood1.png");
+        hglass1 = new Texture("hglass1.png");
+        pig1= new Texture("pig1.png");
 
     }
 
@@ -59,16 +65,20 @@ public class Level1Screen implements Screen {
         game.batch.draw(red1, 200f+45f, 635f-455f+120f, 42f, 42f);
         game.batch.draw(yellow1, 180f, 635f-455f, 52f, 52f);
         game.batch.draw(bigRed1,80f,635f-455f, 88f, 88f);
+        game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
+        game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
+        game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
+        game.batch.draw(pig1,800f+106f-30f,635f-455f+212f+22f,70f,70f);
 
 
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         //change to pauseButton2 if hover
         if(Gdx.input.getX()>1220f && Gdx.input.getX()<1270f && 720f-Gdx.input.getY()>660f && 720f-Gdx.input.getY()<710f){
             game.batch.draw(pauseButton2, 1220f, 660f, 50f, 50f);
-//            if(Gdx.input.isTouched()){
-//                game.setScreen(new PauseScreen(game));
-//                dispose();
-//            }
+            if(Gdx.input.isTouched()){
+                game.setScreen(new PauseScreen(game));
+                dispose();
+            }
         }
         game.batch.end();
 

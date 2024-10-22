@@ -13,6 +13,7 @@ public class MenuScreen implements Screen {
     private Music bgmusic;
     private Texture level1;
     private Texture level2;
+    private Texture level3;
 
     public MenuScreen(Main game){
         this.game = game;
@@ -23,9 +24,10 @@ public class MenuScreen implements Screen {
     public void show() {
         //bgmusic = Gdx.audio.newMusic(Gdx.files.internal("intro2.mp3"));
 
-        bgimage = new Texture("angrybirdsintro3.png"); // credits - https://www.deviantart.com/krimadraws/art/Angry-Birds-Splash-screen-but-even-more-Classic-916194469
-        level1 = new Texture("play1.png");
-        level2 = new Texture("play2.png");
+        bgimage = new Texture("menubg.png"); // credits - https://www.deviantart.com/krimadraws/art/Angry-Birds-Splash-screen-but-even-more-Classic-916194469
+        level1 = new Texture("level1.png");
+        level2 = new Texture("level2.png");
+        level3= new Texture("level3.png");
     }
 
     @Override
@@ -34,8 +36,9 @@ public class MenuScreen implements Screen {
         ScreenUtils.clear(Color.BLACK);
         game.batch.begin();
         game.batch.draw(bgimage, 0, 0, 1280f, 720f);
-
-        game.batch.draw(level1, 540f-(100f/2f), 60f, 100f, 97.67f);
+        game.batch.draw(level1, 320f-(220f/2f), 360f-(220f/2f), 220f, 220f);
+        game.batch.draw(level2, 640f-(220f/2f), 360f-(220f/2f), 220f, 220f);
+        game.batch.draw(level3, 960f-(220f/2f), 360f-(220f/2f), 220f, 220f);
         game.batch.end();
     }
 

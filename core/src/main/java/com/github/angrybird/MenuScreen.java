@@ -14,6 +14,7 @@ public class MenuScreen implements Screen {
     private Texture level1;
     private Texture level2;
     private Texture level3;
+    private Texture textLogo;
 
     public MenuScreen(Main game){
         this.game = game;
@@ -28,6 +29,8 @@ public class MenuScreen implements Screen {
         level1 = new Texture("level1.png");
         level2 = new Texture("level2.png");
         level3= new Texture("level3.png");
+        textLogo = new Texture("textLogo.png");
+
     }
 
     @Override
@@ -39,6 +42,18 @@ public class MenuScreen implements Screen {
         game.batch.draw(level1, 320f-(220f/2f), 360f-(220f/2f), 220f, 220f);
         game.batch.draw(level2, 640f-(220f/2f), 360f-(220f/2f), 220f, 220f);
         game.batch.draw(level3, 960f-(220f/2f), 360f-(220f/2f), 220f, 220f);
+        game.batch.draw(textLogo,640f-(660f/2f), 600f-(150f/2f),660f,150f);
+
+        //change to level 1 if clicked on level1 button
+        if(Gdx.input.getX()>210f && Gdx.input.getX()<430f && 720f-Gdx.input.getY()>250f && 720f-Gdx.input.getY()<470f) {
+            if (Gdx.input.isTouched()) {
+
+                game.setScreen(new Level1Screen(game));
+                dispose();
+            }
+        }
+
+
         game.batch.end();
     }
 

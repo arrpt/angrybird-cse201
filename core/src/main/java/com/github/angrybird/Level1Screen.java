@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Level1Screen implements Screen {
@@ -24,7 +26,7 @@ public class Level1Screen implements Screen {
     private Texture vwood1;
     private Texture hglass1;
     private Texture pig1;
-
+    private World world;
 
     public Level1Screen(Main game){
         this.game = game;
@@ -32,7 +34,7 @@ public class Level1Screen implements Screen {
 
     @Override
     public void show() {
-
+        world = new World(new Vector2(0, -9.8f), true);
         sky = new Texture("skyl1.png");
         ground = new Texture("groundl1.png");
         pauseButton = new Texture("pausebutton.png");

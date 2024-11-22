@@ -5,8 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Level1Screen implements Screen {
@@ -35,7 +34,7 @@ public class Level1Screen implements Screen {
     public void show() {
         world = new World(new Vector2(0, -9.8f), true);
         sky = new Texture("skyl1.png");
-        ground = new Texture("groundl1.png");
+        //ground = new Texture("groundl1.png");
         pauseButton = new Texture("pausebutton.png");
         pauseButton2 = new Texture("pausebutton2.png");
         grass = new Texture("grass.png");
@@ -52,6 +51,7 @@ public class Level1Screen implements Screen {
         //pig1= new Texture("pig1.png");
         redBird = new RedBird();
         redBird.createBody(world, 100, 300);
+        createGroundBody();
     }
 
     @Override
@@ -116,5 +116,26 @@ public class Level1Screen implements Screen {
     @Override
     public void dispose() {
         world.dispose();
+    }
+
+    private void createGroundBody() {
+        ground = new Texture("groundl1.png");
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.position.set(0, -450f);
+        groundBodyDef.type = BodyDef.BodyType.StaticBody;
+
+        Body groundBody = world.createBody(groundBodyDef);
+
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(1280f, 635f);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = groundBox;
+        fixtureDef.density = 0.0f;
+        fixtureDef.friction = 0.5f;
+        fixtureDef.restitution = 0.2f;
+
+        groundBody.createFixture(fixtureDef);
+        groundBox.dispose();
     }
 }

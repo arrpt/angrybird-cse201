@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -19,14 +20,12 @@ public class Level1Screen implements Screen {
 //    private Texture slingLeft;
     private Texture sling;
     private Texture grass;
-    private Texture red1;
-    private Texture yellow1;
-    private Texture bigRed1;
     private Texture vstone1;
     private Texture vwood1;
     private Texture hglass1;
-    private Texture pig1;
     private World world;
+    private RedBird redBird;
+    private Slingshot slingshot;
 
     public Level1Screen(Main game){
         this.game = game;
@@ -43,14 +42,16 @@ public class Level1Screen implements Screen {
 //        slingRight = new Texture("slingright.png");
 //        slingLeft = new Texture("slingleft.png");
         sling = new Texture("sling.png");
-        red1 = new Texture("red1.png");
-        yellow1 = new Texture("yellow1.png");
-        bigRed1 = new Texture("bigred1.png");
+        //red1 = new Texture("red1.png");
+        //yellow1 = new Texture("yellow1.png");
+        //bigRed1 = new Texture("bigred1.png");
         vstone1 = new Texture("vstone1.png");
         vwood1 = new Texture("vwood1.png");
         hglass1 = new Texture("hglass1.png");
-        pig1= new Texture("pig1.png");
-
+        slingshot = new Slingshot(200, 200);
+        //pig1= new Texture("pig1.png");
+        redBird = new RedBird();
+        redBird.createBody(world, 100, 300);
     }
 
     @Override
@@ -61,20 +62,25 @@ public class Level1Screen implements Screen {
         game.batch.draw(sky, 0, 0, 1280f, 720f);
         game.batch.draw(ground, 0, -450f, 1280f, 635f);
         game.batch.draw(pauseButton, 1220f, 660f, 50f, 50f);
-        //game.batch.draw(slingRight, 640f-50f, 635f-451f, 36f, 200f);
+        //game.batch.draw(slingRight, 640f-50f, 635f-45 1f, 36f, 200f);
         //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
         game.batch.draw(sling,200f,635f-455f,92f,170f);
-        game.batch.draw(red1, 200f+45f, 635f-455f+120f, 42f, 42f);
-        game.batch.draw(yellow1, 180f, 635f-455f, 52f, 52f);
-        game.batch.draw(bigRed1,80f,635f-455f, 88f, 88f);
         game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
         game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
         game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
-        game.batch.draw(pig1,800f+106f-30f,635f-455f+212f+22f,70f,70f);
-
-
-        //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
+        game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
+        game.batch.draw(redBird.getTexture(), redBird.getBody().getPosition().x, redBird.getBody().getPosition().y);
+        game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
+        game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         //change to pauseButton2 if hover
+
+        if (Gdx.input.isTouched()) {
+            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.getBody());
+        } else if (slingshot.isPulled()) {
+            slingshot.release(redBird.getBody());
+        }
+
+        world.step(1 / 60f, 6, 2);
         if(Gdx.input.getX()>1220f && Gdx.input.getX()<1270f && 720f-Gdx.input.getY()>660f && 720f-Gdx.input.getY()<710f){
             game.batch.draw(pauseButton2, 1220f, 660f, 50f, 50f);
             if(Gdx.input.isTouched()){
@@ -108,6 +114,6 @@ public class Level1Screen implements Screen {
 
     @Override
     public void dispose() {
-
+        world.dispose();
     }
 }

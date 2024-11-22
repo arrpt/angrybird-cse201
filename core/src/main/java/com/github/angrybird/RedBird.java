@@ -46,4 +46,8 @@ public class RedBird {
     public Body getBody() {
         return body;
     }
+
+    public void dispose(){
+        texture.dispose();
+    }
 }

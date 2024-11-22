@@ -29,12 +29,17 @@ public class Slingshot {
         pullPoint.set(newPullPoint);
         isPulled = true;
         birdBody.setTransform(pullPoint, birdBody.getAngle());
+
+
     }
 
     public void release(Body birdBody) {
         if (isPulled) {
             Vector2 force = anchorPoint.cpy().sub(pullPoint).scl(80); // Adjust the scaling factor as needed
             birdBody.applyLinearImpulse(force, birdBody.getWorldCenter(), true);
+//            birdBody.setAwake(true);
+//            Vector2 additionalForce = force.scl(10000f);
+//            birdBody.applyForceToCenter(additionalForce, true);
             isPulled = false;
             pullPoint.set(anchorPoint);
         }

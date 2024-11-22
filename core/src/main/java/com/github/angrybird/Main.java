@@ -30,6 +30,7 @@ public class Main extends Game {
         this.setScreen(new StartupScreen(this));
     }
 
+
     @Override
     public void render() {
         super.render();

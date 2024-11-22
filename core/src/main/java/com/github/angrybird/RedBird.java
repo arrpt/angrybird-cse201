@@ -31,6 +31,8 @@ public class RedBird {
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
         body.setGravityScale(0);
+
+
         c.dispose();
     }
 

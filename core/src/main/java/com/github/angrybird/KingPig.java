@@ -97,6 +97,9 @@ public class KingPig {
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
         body.createFixture(fixture);
+        body.setLinearVelocity(0, 0);
+        body.setAngularVelocity(0);
+        body.setGravityScale(0);
         c.dispose();
     }
 
@@ -120,5 +123,12 @@ public class KingPig {
         texture.dispose();
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setGravityScale(float gravityScale){
+        body.setGravityScale(gravityScale);
+    }
 }
 

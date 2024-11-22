@@ -28,6 +28,9 @@ public class Terence {
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
         body.createFixture(fixture);
+        body.setLinearVelocity(0, 0);
+        body.setAngularVelocity(0);
+        body.setGravityScale(0);
         c.dispose();
     }
 
@@ -49,5 +52,13 @@ public class Terence {
 
     public void dispose(){
         texture.dispose();
+    }
+
+    public void setGravityScale(float gravityScale) {
+        body.setGravityScale(gravityScale);
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

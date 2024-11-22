@@ -10,6 +10,7 @@ public class Slingshot {
     private Vector2 anchorPoint;
     private Vector2 pullPoint;
     private boolean isPulled;
+    final int maxRadius;
 
     public Slingshot(float x, float y) {
         anchorPoint = new Vector2(x, y);
@@ -17,17 +18,22 @@ public class Slingshot {
         isPulled = false;
         leftSling = new Texture("slingleft.png");
         rightSling = new Texture("slingright.png");
+        maxRadius = 100;
     }
 
     public void pull(float x, float y, Body birdBody) {
-        pullPoint.set(x, y);
+        Vector2 newPullPoint = new Vector2(x, y);
+        if (newPullPoint.dst(anchorPoint) > maxRadius) {
+            newPullPoint = anchorPoint.cpy().add(newPullPoint.sub(anchorPoint).nor().scl(maxRadius));
+        }
+        pullPoint.set(newPullPoint);
         isPulled = true;
         birdBody.setTransform(pullPoint, birdBody.getAngle());
     }
 
     public void release(Body birdBody) {
         if (isPulled) {
-            Vector2 force = anchorPoint.cpy().sub(pullPoint).scl(10); // Adjust the scaling factor as needed
+            Vector2 force = anchorPoint.cpy().sub(pullPoint).scl(80); // Adjust the scaling factor as needed
             birdBody.applyLinearImpulse(force, birdBody.getWorldCenter(), true);
             isPulled = false;
             pullPoint.set(anchorPoint);

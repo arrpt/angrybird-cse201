@@ -78,6 +78,7 @@ public class Level1Screen implements Screen {
             slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.getBody());
         } else if (slingshot.isPulled()) {
             slingshot.release(redBird.getBody());
+            redBird.setGravityScale(1);
         }
 
         world.step(1 / 60f, 6, 2);

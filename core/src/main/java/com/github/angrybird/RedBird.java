@@ -28,7 +28,14 @@ public class RedBird {
         fixture.restitution = 0.6f;
 
         body.createFixture(fixture);
+        body.setLinearVelocity(0, 0);
+        body.setAngularVelocity(0);
+        body.setGravityScale(0);
         c.dispose();
+    }
+
+    public void setGravityScale(float gravityScale){
+        body.setGravityScale(gravityScale);
     }
 
     public BodyDef getBodyDef() {

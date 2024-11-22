@@ -3,7 +3,7 @@ package com.github.angrybird;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Terence {
+public class Terence extends Bird {
     int health;
     private Body body;
     private BodyDef bodyDef;
@@ -34,31 +34,31 @@ public class Terence {
         c.dispose();
     }
 
-    public BodyDef getBodyDef() {
-        return bodyDef;
-    }
-
-    public FixtureDef getFixture() {
-        return fixture;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public Body getBody() {
-        return body;
-    }
+//    public BodyDef getBodyDef() {
+//        return bodyDef;
+//    }
+//
+//    public FixtureDef getFixture() {
+//        return fixture;
+//    }
+//
+//    public Texture getTexture() {
+//        return texture;
+//    }
+//
+//    public Body getBody() {
+//        return body;
+//    }
 
     public void dispose(){
         texture.dispose();
     }
 
-    public void setGravityScale(float gravityScale) {
-        body.setGravityScale(gravityScale);
-    }
-
-    public int getHealth() {
-        return health;
-    }
+//    public void setGravityScale(float gravityScale) {
+//        body.setGravityScale(gravityScale);
+//    }
+//
+//    public int getHealth() {
+//        return health;
+//    }
 }

@@ -69,16 +69,16 @@ public class Level1Screen implements Screen {
         game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
         game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
         game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
-        game.batch.draw(redBird.getTexture(), redBird.getBody().getPosition().x, redBird.getBody().getPosition().y);
+        game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
         game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         //change to pauseButton2 if hover
 
         if (Gdx.input.isTouched()) {
-            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.getBody());
+            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.body);
         } else if (slingshot.isPulled()) {
-            slingshot.release(redBird.getBody());
-            redBird.setGravityScale(1);
+            slingshot.release(redBird.body);
+            redBird.body.setGravityScale(1);
         }
 
         world.step(1 / 60f, 6, 2);

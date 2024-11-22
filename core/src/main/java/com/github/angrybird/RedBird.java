@@ -3,12 +3,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class RedBird {
+    int health;
     private Body body;
     private BodyDef bodyDef;
     private FixtureDef fixture;
     private Texture texture;
 
     public RedBird(){
+        health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();

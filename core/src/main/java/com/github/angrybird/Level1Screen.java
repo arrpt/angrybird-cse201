@@ -120,7 +120,7 @@ public class Level1Screen implements Screen {
         if (Gdx.input.isTouched() && Gdx.input.getX()>200f-180f && Gdx.input.getX()<200f+180f && 720f-Gdx.input.getY()>635f-455f && 720f-Gdx.input.getY()<635f-455f+170f+180f) {
 
             slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.body);
-            slingshot.calculateTrajectory(redBird.body, 50, game.batch);
+            slingshot.calculateTrajectory(redBird.body, 20, game.batch);
         } else if (!Gdx.input.isTouched() && slingshot.isPulled()) {
             slingshot.release(redBird.body);
             redBird.body.setGravityScale(1);

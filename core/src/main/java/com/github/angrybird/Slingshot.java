@@ -51,45 +51,30 @@ public class Slingshot {
         }
     }
 
-
-    public Vector2 getTrajectoryPoint(Vector2 start, Vector2 velocity, float n) {
-//        float t = 1 / 60f;
-//        float tt = t * t;
-//        float stepVelocityX = t * -velocity.x;
-//        float stepVelocityY = t * -velocity.y;
-//        float stepGravityX = tt * 0f;
-//        float stepGravityY = tt * (-9.8f);
-//        float tpx = start.x + n * stepVelocityX + 0.5f * (n * n + n) * stepGravityX;
-//        float tpy = start.y + n * stepVelocityY + 0.5f * (n * n + n) * stepGravityY;
-//        return new Vector2(tpx, tpy);
-
-        float t = n;
-        float gravity = -9.8f; // Assuming gravity is -9.8 m/s^2
-
-        float tpx = start.x + velocity.x * t;
-        float tpy = start.y + velocity.y * t + 0.5f * gravity * t * t;
-
-        return new Vector2(tpx, tpy);
-    }
-
     public void calculateTrajectory(Body birdBody, int numPoints, SpriteBatch batch) {
         Texture target = new Texture("red1.png");
         Vector2 initialPosition = birdBody.getPosition();
-        Vector2 initialVelocity = anchorPoint.cpy().sub(pullPoint).scl(600); // Initial velocity
-        Vector2 gravity = birdBody.getWorld().getGravity();
-        float timeStep = 1/500f; // Assuming 60 FPS
+        System.out.println("Initial position: " + initialPosition);
 
-        for (int i = 0; i < numPoints; i++) {
-            float t = i * timeStep;
-//            Vector2 position = new Vector2(
-//                initialPosition.x + initialVelocity.x * t + 0.5f * gravity.x * t * t,
-//                initialPosition.y + initialVelocity.y * t + 0.5f * gravity.y * t * t
-//            );
-            Vector2 position = getTrajectoryPoint(initialPosition, initialVelocity, t);
+        Vector2 initialVelocity = anchorPoint.cpy().sub(pullPoint).scl(600); // Initial velocity
+        initialVelocity.x = initialVelocity.x / birdBody.getMass();
+        initialVelocity.y = initialVelocity.y / birdBody.getMass();
+        System.out.println("Initial velocity: " + initialVelocity);
+        Vector2 gravity = birdBody.getWorld().getGravity();
+        float timeStep = 0.5f; // Small time increment for each point
+
+        for (int i = 1; i <= numPoints; i++) {
+            float t = i * timeStep; // Calculate time for this point
+            Vector2 position = new Vector2(
+                initialPosition.x + initialVelocity.x * t + 0.5f * gravity.x * t * t,
+                initialPosition.y + initialVelocity.y * t + 0.5f * gravity.y * t * t
+            );
+            //System.out.println("Position: " + position);
             batch.draw(target, position.x, position.y, 5f, 5f); // Draw small dots for trajectory
         }
         target.dispose();
     }
+
 
 
 //    public Vector2 getTrajectoryPoint(Vector2 start, Vector2 velocity, float time) {

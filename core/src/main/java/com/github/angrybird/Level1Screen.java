@@ -30,6 +30,8 @@ public class Level1Screen implements Screen {
     private Slingshot slingshot;
     private BitmapFont font;
     private Hwood hwood;
+    private Vglass vglass;
+    private Hstone hstone;
     private Box2DDebugRenderer box2ddebugrenderer;
 
     public Level1Screen(Main game){
@@ -52,9 +54,10 @@ public class Level1Screen implements Screen {
         //red1 = new Texture("red1.png");
         //yellow1 = new Texture("yellow1.png");
         //bigRed1 = new Texture("bigred1.png");
-        vstone1 = new Texture("vstone1.png");
-        vwood1 = new Texture("vwood1.png");
-        hglass1 = new Texture("hglass1.png");
+        //vstone1 = new Texture("vstone1.png");
+        //vwood1 = new Texture("vwood1.png");
+        //hglass1 = new Texture("hglass1.png");
+
         slingshot = new Slingshot(250f, 635f-455f+130f);
 
         //Font here
@@ -70,6 +73,11 @@ public class Level1Screen implements Screen {
         redBird.createBody(world, 200f, 635f-455f+130f);
         hwood = new Hwood();
         hwood.createBody(world, 800f, 635f-455f);
+        vglass = new Vglass();
+        vglass.createBody(world, 800f, 635f-455f+212f);
+        hstone = new Hstone();
+        hstone.createBody(world, 800f, 635f-455f+212f+22f);
+
         ground = new Ground(world);
         box2ddebugrenderer = new Box2DDebugRenderer();
 
@@ -91,7 +99,10 @@ public class Level1Screen implements Screen {
         game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
         game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
         //game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
-        game.batch.draw(hwood.texture, hwood.body.getPosition().x, hwood.body.getPosition().y);
+        game.batch.draw(hwood.texture, hwood.body.getPosition().x - hwood.texture.getWidth() / 2f, hwood.body.getPosition().y - hwood.texture.getHeight() / 2f);
+        game.batch.draw(vglass.texture, vglass.body.getPosition().x - vglass.texture.getWidth() / 2f, vglass.body.getPosition().y - vglass.texture.getHeight() / 2f);
+        game.batch.draw(hstone.texture, hstone.body.getPosition().x - hstone.texture.getWidth() / 2f, hstone.body.getPosition().y - hstone.texture.getHeight() / 2f);
+
         //game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
         game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         //game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);

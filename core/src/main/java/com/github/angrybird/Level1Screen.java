@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -12,7 +14,7 @@ public class Level1Screen implements Screen {
 
     Main game;
     private Texture sky;
-    private Texture ground;
+    private Ground ground;
     private Texture pauseButton;
     private Texture pauseButton2;
 //    private Texture slingRight;
@@ -25,6 +27,7 @@ public class Level1Screen implements Screen {
     private World world;
     private RedBird redBird;
     private Slingshot slingshot;
+    private BitmapFont font;
 
     public Level1Screen(Main game){
         this.game = game;
@@ -33,6 +36,7 @@ public class Level1Screen implements Screen {
     @Override
     public void show() {
         world = new World(new Vector2(0, -9.8f), true);
+        world.setContactListener(new GameContactListener());
         sky = new Texture("skyl1.png");
         //ground = new Texture("groundl1.png");
         pauseButton = new Texture("pausebutton.png");
@@ -48,10 +52,19 @@ public class Level1Screen implements Screen {
         vwood1 = new Texture("vwood1.png");
         hglass1 = new Texture("hglass1.png");
         slingshot = new Slingshot(200, 200);
-        //pig1= new Texture("pig1.png");
+
+        //Font here
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("angrybirds-regular.ttf"));
+        fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("angrybirds-regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 20;
+        parameter.borderWidth = 1;
+        font = fontGenerator.generateFont(parameter);
+        fontGenerator.dispose();
+
         redBird = new RedBird();
         redBird.createBody(world, 100, 300);
-        createGroundBody();
+        ground = new Ground(world);
     }
 
     @Override
@@ -60,7 +73,7 @@ public class Level1Screen implements Screen {
         ScreenUtils.clear(Color.BLACK);
         game.batch.begin();
         game.batch.draw(sky, 0, 0, 1280f, 720f);
-        game.batch.draw(ground, 0, -450f, 1280f, 635f);
+        game.batch.draw(ground.texture, 0, -450f, 1280f, 635f);
         game.batch.draw(pauseButton, 1220f, 660f, 50f, 50f);
         //game.batch.draw(slingRight, 640f-50f, 635f-45 1f, 36f, 200f);
         //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
@@ -72,6 +85,7 @@ public class Level1Screen implements Screen {
         game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
         game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
+        font.draw(game.batch, "nigger", 10, 710);
         //change to pauseButton2 if hover
 
         if (Gdx.input.isTouched()) {
@@ -118,24 +132,24 @@ public class Level1Screen implements Screen {
         world.dispose();
     }
 
-    private void createGroundBody() {
-        ground = new Texture("groundl1.png");
-        BodyDef groundBodyDef = new BodyDef();
-        groundBodyDef.position.set(0, -450f);
-        groundBodyDef.type = BodyDef.BodyType.StaticBody;
-
-        Body groundBody = world.createBody(groundBodyDef);
-
-        PolygonShape groundBox = new PolygonShape();
-        groundBox.setAsBox(1280f, 635f);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = groundBox;
-        fixtureDef.density = 0.0f;
-        fixtureDef.friction = 0.5f;
-        fixtureDef.restitution = 0.2f;
-
-        groundBody.createFixture(fixtureDef);
-        groundBox.dispose();
-    }
+//    private void createGroundBody() {
+//        ground = new Texture("groundl1.png");
+//        BodyDef groundBodyDef = new BodyDef();
+//        groundBodyDef.position.set(0, -450f);
+//        groundBodyDef.type = BodyDef.BodyType.StaticBody;
+//
+//        Body groundBody = world.createBody(groundBodyDef);
+//
+//        PolygonShape groundBox = new PolygonShape();
+//        groundBox.setAsBox(1280f, 635f);
+//
+//        FixtureDef fixtureDef = new FixtureDef();
+//        fixtureDef.shape = groundBox;
+//        fixtureDef.density = 0.0f;
+//        fixtureDef.friction = 0.5f;
+//        fixtureDef.restitution = 0.2f;
+//
+//        groundBody.createFixture(fixtureDef);
+//        groundBox.dispose();
+//    }
 }

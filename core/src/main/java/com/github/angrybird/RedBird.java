@@ -30,6 +30,7 @@ public class RedBird extends Bird {
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
         body.setGravityScale(0);
+        body.setUserData(this);
         c.dispose();
     }
 

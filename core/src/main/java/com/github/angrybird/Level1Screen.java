@@ -29,6 +29,8 @@ public class Level1Screen implements Screen {
     private RedBird redBird;
     private Slingshot slingshot;
     private BitmapFont font;
+    private Hwood hwood;
+    private Box2DDebugRenderer box2ddebugrenderer;
 
     public Level1Screen(Main game){
         this.game = game;
@@ -38,6 +40,7 @@ public class Level1Screen implements Screen {
     public void show() {
         world = new World(new Vector2(0, -9.8f), true);
         world.setContactListener(new GameContactListener());
+        //box2ddebugrenderer = new Box2DDebugRenderer();
         sky = new Texture("skyl1.png");
         //ground = new Texture("groundl1.png");
         pauseButton = new Texture("pausebutton.png");
@@ -65,7 +68,11 @@ public class Level1Screen implements Screen {
 
         redBird = new RedBird();
         redBird.createBody(world, 200f, 635f-455f+130f);
+        hwood = new Hwood();
+        hwood.createBody(world, 800f, 635f-455f);
         ground = new Ground(world);
+        box2ddebugrenderer = new Box2DDebugRenderer();
+
     }
 
     @Override
@@ -83,7 +90,8 @@ public class Level1Screen implements Screen {
 
         game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
         game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
-        game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
+        //game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
+        game.batch.draw(hwood.texture, hwood.body.getPosition().x, hwood.body.getPosition().y);
         //game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
         game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         //game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
@@ -101,13 +109,6 @@ public class Level1Screen implements Screen {
             slingshot.release(redBird.body);
             redBird.body.setGravityScale(1);
         }
-
-        world.step(1 / 60f, 6, 2);
-        world.step(1 / 60f, 6, 2);
-        world.step(1 / 60f, 6, 2);
-        world.step(1 / 60f, 6, 2);
-        world.step(1 / 60f, 6, 2);
-        world.step(1 / 60f, 6, 2);
         //world.step(1 / 60f, 6, 2);
         //world.step(1 / 60f, 6, 2);
         //world.step(1 / 60f, 6, 2);
@@ -120,7 +121,13 @@ public class Level1Screen implements Screen {
             }
         }
         game.batch.end();
-
+        world.step(1 / 60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
+        box2ddebugrenderer.render(world, game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
     }
 
     @Override
@@ -146,6 +153,7 @@ public class Level1Screen implements Screen {
     @Override
     public void dispose() {
         world.dispose();
+        box2ddebugrenderer.dispose();
     }
 
 //    private void createGroundBody() {

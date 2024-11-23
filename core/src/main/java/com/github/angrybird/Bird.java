@@ -2,6 +2,7 @@ package com.github.angrybird;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class Bird {
@@ -10,11 +11,13 @@ public abstract class Bird {
     public BodyDef bodyDef;
     public FixtureDef fixture;
     public Texture texture;
-
+    public TextureRegion textureRegion;
+    public int isReleased;
     public Bird() {
-        bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        fixture = new FixtureDef();
+//        bodyDef = new BodyDef();
+//        bodyDef.type = BodyDef.BodyType.DynamicBody;
+//        fixture = new FixtureDef();
+        isReleased=0;
     }
 
     public abstract void createBody(World world, float x, float y);

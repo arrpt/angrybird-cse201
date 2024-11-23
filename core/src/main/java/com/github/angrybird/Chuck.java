@@ -6,30 +6,31 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Chuck extends Bird {
-    public int health;
-    public Body body;
-    public BodyDef bodyDef;
-    public FixtureDef fixture;
-    public Texture texture;
-    public TextureRegion textureRegion;
+//    public int health;
+//    public Body body;
+//    public BodyDef bodyDef;
+//    public FixtureDef fixture;
+//    public Texture texture;
+//    public TextureRegion textureRegion;
 
     public Chuck(World world, float x, float y){
-        health = 100;
-        bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        fixture = new FixtureDef();
-        texture = new Texture("yellow1.png");
-        textureRegion = new TextureRegion(texture);
+        super();
+        super.health = 100;
+        super.bodyDef = new BodyDef();
+        super.bodyDef.type = BodyDef.BodyType.DynamicBody;
+        super.fixture = new FixtureDef();
+        super.texture = new Texture("yellow1.png");
+        super.textureRegion = new TextureRegion(texture);
         createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
         bodyDef.position.set(x, y);
-        body = world.createBody(bodyDef);
+        super.body = world.createBody(bodyDef);
         CircleShape c = new CircleShape();
         c.setRadius(20f);
         fixture.shape = c;
-        fixture.density = 1f;
+        fixture.density = 0.5f;
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
         body.setAngularDamping(5f);

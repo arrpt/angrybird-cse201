@@ -1,12 +1,15 @@
 package com.github.angrybird;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 
 public class Slingshot {
     //public Texture leftSling;
@@ -51,15 +54,40 @@ public class Slingshot {
         }
     }
 
+    public void setBirdPosition(Body birdBody) {
+        birdBody.setTransform(anchorPoint, birdBody.getAngle());
+        birdBody.setGravityScale(0);
+    }
+
+    public void animateBirdToPosition(Bird bird, Vector2 targetPosition, float duration) {
+        Vector2 startPosition = bird.body.getPosition();
+        Timer.schedule(new Timer.Task() {
+            float elapsedTime = 0;
+
+            @Override
+            public void run() {
+                elapsedTime += Gdx.graphics.getDeltaTime();
+                float alpha = Math.min(3, elapsedTime / duration);
+                Vector2 newPosition = startPosition.lerp(targetPosition, Interpolation.linear.apply(alpha));
+                bird.body.setTransform(newPosition, bird.body.getAngle());
+
+                if (alpha >= 2.5) {
+                    this.cancel();
+                }
+            }
+        }, 0, 1 / 60f);
+    }
+
+
     public void calculateTrajectory(Body birdBody, int numPoints, SpriteBatch batch) {
         Texture target = new Texture("red1.png");
         Vector2 initialPosition = birdBody.getPosition();
-        System.out.println("Initial position: " + initialPosition);
+        //System.out.println("Initial position: " + initialPosition);
 
         Vector2 initialVelocity = anchorPoint.cpy().sub(pullPoint).scl(600); // Initial velocity
         initialVelocity.x = initialVelocity.x / birdBody.getMass();
         initialVelocity.y = initialVelocity.y / birdBody.getMass();
-        System.out.println("Initial velocity: " + initialVelocity);
+        //System.out.println("Initial velocity: " + initialVelocity);
         Vector2 gravity = birdBody.getWorld().getGravity();
         float timeStep = 0.5f; // Small time increment for each point
 

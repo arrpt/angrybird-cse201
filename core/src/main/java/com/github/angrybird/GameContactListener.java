@@ -15,11 +15,11 @@ public class GameContactListener implements ContactListener {
         // Bird hits Ground
         if (userDataA instanceof Bird && userDataB instanceof Ground) {
             Bird bird = (Bird) userDataA;
-            System.out.println("Bird hits Ground");
+            //System.out.println("Bird hits Ground");
             // bird.health -= 10;
         } else if (userDataA instanceof Ground && userDataB instanceof Bird) {
             Bird bird = (Bird) userDataB;
-            System.out.println("Bird hits Ground");
+            //System.out.println("Bird hits Ground");
             // bird.health -= 10;
         }
     }

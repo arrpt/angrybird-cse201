@@ -12,6 +12,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import com.badlogic.gdx.utils.Queue;
+
+import java.util.LinkedList;
+
 public class Level1Screen implements Screen {
 
     Main game;
@@ -39,6 +43,9 @@ public class Level1Screen implements Screen {
     Pigga pigga;
     MustPig mustPig;
     KingPig kingPig;
+
+    public Queue<Bird> birdQueue = new Queue<>();
+
 
     public Level1Screen(Main game){
         this.game = game;
@@ -81,12 +88,21 @@ public class Level1Screen implements Screen {
         vglass = new Vglass(world, 800f, 635f-455f+212f);
         hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
         ground = new Ground(world);
-        chuck = new Chuck(world, 200f + 100f, 635f-455f+130f);
-        terence = new Terence(world, 200f + 200f, 635f-455f+130f);
+        chuck = new Chuck(world, 200f - 70f, 635f-455f+130f);
+        terence = new Terence(world, 200f - 150f, 635f-455f+130f);
         pigga = new Pigga(world, 200f+300f, 635f-455f+130f);
         mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
         kingPig = new KingPig(world, 200f+500f, 635f-455f+130f);
         box2ddebugrenderer = new Box2DDebugRenderer();
+
+        //birdQueue = new Queue<>();
+        birdQueue.addLast(redBird);
+        birdQueue.addLast(chuck);
+        birdQueue.addLast(terence);
+        System.out.println("Size: "+birdQueue.size);
+
+
+
     }
 
     @Override
@@ -115,19 +131,58 @@ public class Level1Screen implements Screen {
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);
         //change to pauseButton2 if hover
-        float birdRadius = 5f;
+        //float birdRadius = 5f;
         //Vector2 touchPoint = new Vector2(Gdx.input.getX(), 720 - Gdx.input.getY());
-        if (Gdx.input.isTouched() && Gdx.input.getX()>200f-180f && Gdx.input.getX()<200f+180f && 720f-Gdx.input.getY()>635f-455f && 720f-Gdx.input.getY()<635f-455f+170f+180f) {
+        //System.out.println("BirdQueue size: "+birdQueue.size);
 
-            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.body);
-            slingshot.calculateTrajectory(redBird.body, 20, game.batch);
-        } else if (!Gdx.input.isTouched() && slingshot.isPulled()) {
-            slingshot.release(redBird.body);
-            redBird.body.setGravityScale(1);
+//        int temp=0;
+//        while(temp!=1){
+//            ((birdQueue.first())).body.toString();
+//            redBird.body.toString();
+//            temp++;
+//        }
+//        System.out.println(redBird.body.toString());
+
+
+//        if (Gdx.input.isTouched() && Gdx.input.getX()>200f-180f && Gdx.input.getX()<200f+180f && 720f-Gdx.input.getY()>635f-455f && 720f-Gdx.input.getY()<635f-455f+170f+180f) {
+//
+//            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), birdQueue.first().body);
+//            slingshot.calculateTrajectory(birdQueue.first().body, 20, game.batch);
+//        }
+//        else if (!Gdx.input.isTouched() && slingshot.isPulled()) {
+//            slingshot.release(birdQueue.first().body);
+//            birdQueue.first().body.setGravityScale(1);
+//            birdQueue.removeFirst();
+//            if (!birdQueue.isEmpty() && birdQueue.first().body.getLinearVelocity().isZero()) {
+//                Bird nextBird = birdQueue.first();
+//                slingshot.animateBirdToPosition(nextBird, slingshot.getAnchorPoint(), 1); // 1 second duration
+//                birdQueue.removeFirst();
+//            }
+//        }
+
+
+
+        if (!birdQueue.isEmpty()) {
+            if (Gdx.input.isTouched() && Gdx.input.getX() > 200f - 180f && Gdx.input.getX() < 200f + 180f && 720f - Gdx.input.getY() > 635f - 455f && 720f - Gdx.input.getY() < 635f - 455f + 170f + 180f) {
+                slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), birdQueue.first().body);
+                slingshot.calculateTrajectory(birdQueue.first().body, 20, game.batch);
+            } else if (!Gdx.input.isTouched() && slingshot.isPulled()) {
+                slingshot.release(birdQueue.first().body);
+                birdQueue.first().isReleased=1;
+                birdQueue.first().body.setGravityScale(1);
+                //birdQueue.removeFirst();
+            }
         }
-        //world.step(1 / 60f, 6, 2);
-        //world.step(1 / 60f, 6, 2);
-        //world.step(1 / 60f, 6, 2);
+
+        if (!birdQueue.isEmpty() && birdQueue.first().body.getLinearVelocity().x==0.0f && birdQueue.first().body.getLinearVelocity().y==0.0f  && birdQueue.first().isReleased==1) {
+
+            birdQueue.removeFirst();
+            Bird nextBird = birdQueue.first();
+            slingshot.animateBirdToPosition(nextBird, slingshot.getAnchorPoint(), 1); // 1 second duration
+//            birdQueue.removeFirst();
+        }
+
+
 
         if(Gdx.input.getX()>1220f && Gdx.input.getX()<1270f && 720f-Gdx.input.getY()>660f && 720f-Gdx.input.getY()<710f){
             game.batch.draw(pauseButton2, 1220f, 660f, 50f, 50f);

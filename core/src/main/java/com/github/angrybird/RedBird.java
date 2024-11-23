@@ -21,7 +21,7 @@ public class RedBird extends Bird {
         bodyDef.position.set(x, y);
         body = world.createBody(bodyDef);
         CircleShape c = new CircleShape();
-        c.setRadius(9f);
+        c.setRadius(14f);
         fixture.shape = c;
         fixture.density = 1f;
         fixture.friction = 0.5f;

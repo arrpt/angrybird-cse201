@@ -98,8 +98,8 @@ public class Level1Screen implements Screen {
 
         game.batch.draw(sling,200f,635f-455f,92f,170f);
 
-        game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
-        game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
+        //game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
+        //game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
         //game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
         //game.batch.draw(hwood.texture, hwood.body.getPosition().x - hwood.texture.getWidth() / 2f, hwood.body.getPosition().y - hwood.texture.getHeight() / 2f);
 
@@ -143,8 +143,8 @@ public class Level1Screen implements Screen {
             (float) Math.toDegrees(hstone.body.getAngle()));
 
         game.batch.draw(redBirdRegion,
-            redBird.body.getPosition().x - redBirdRegion.getRegionWidth() / 2f,
-            redBird.body.getPosition().y - redBirdRegion.getRegionHeight() / 2f,
+            redBird.body.getPosition().x - redBirdRegion.getRegionWidth() / 2f-4f,
+            redBird.body.getPosition().y - redBirdRegion.getRegionHeight() / 2f+2f,
             redBirdRegion.getRegionWidth() / 2f,
             redBirdRegion.getRegionHeight() / 2f,
             redBirdRegion.getRegionWidth(),

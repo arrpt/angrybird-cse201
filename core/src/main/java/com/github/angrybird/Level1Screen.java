@@ -34,6 +34,11 @@ public class Level1Screen implements Screen {
     private Vglass vglass;
     private Hstone hstone;
     private Box2DDebugRenderer box2ddebugrenderer;
+    Chuck chuck;
+    Terence terence;
+    Pigga pigga;
+    MustPig mustPig;
+    KingPig kingPig;
 
     public Level1Screen(Main game){
         this.game = game;
@@ -71,18 +76,17 @@ public class Level1Screen implements Screen {
         font = fontGenerator.generateFont(parameter);
         fontGenerator.dispose();
 
-        redBird = new RedBird();
-        redBird.createBody(world, 200f, 635f-455f+130f);
-        hwood = new Hwood();
-        hwood.createBody(world, 800f, 635f-455f);
-        vglass = new Vglass();
-        vglass.createBody(world, 800f, 635f-455f+212f);
-        hstone = new Hstone();
-        hstone.createBody(world, 800f, 635f-455f+212f+22f);
-
+        redBird = new RedBird(world, 200f, 635f-455f+130f);
+        hwood = new Hwood(world, 800f, 635f-455f);
+        vglass = new Vglass(world, 800f, 635f-455f+212f);
+        hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
         ground = new Ground(world);
+        chuck = new Chuck(world, 200f + 100f, 635f-455f+130f);
+        terence = new Terence(world, 200f + 200f, 635f-455f+130f);
+        pigga = new Pigga(world, 200f+300f, 635f-455f+130f);
+        mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
+        kingPig = new KingPig(world, 200f+500f, 635f-455f+130f);
         box2ddebugrenderer = new Box2DDebugRenderer();
-
     }
 
     @Override
@@ -97,65 +101,16 @@ public class Level1Screen implements Screen {
         //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
 
         game.batch.draw(sling,200f,635f-455f,92f,170f);
+        redBird.render(game.batch);
+        hwood.render(game.batch);
+        vglass.render(game.batch);
+        hstone.render(game.batch);
+        chuck.render(game.batch);
+        terence.render(game.batch);
+        pigga.render(game.batch);
+        mustPig.render(game.batch);
+        kingPig.render(game.batch);
 
-        //game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
-        //game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
-        //game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
-        //game.batch.draw(hwood.texture, hwood.body.getPosition().x - hwood.texture.getWidth() / 2f, hwood.body.getPosition().y - hwood.texture.getHeight() / 2f);
-
-        TextureRegion hwoodRegion = new TextureRegion(hwood.texture);
-        TextureRegion vglassRegion = new TextureRegion(vglass.texture);
-        TextureRegion hstoneRegion = new TextureRegion(hstone.texture);
-        TextureRegion redBirdRegion = new TextureRegion(redBird.texture);
-
-        game.batch.draw(hwoodRegion,
-            hwood.body.getPosition().x - hwoodRegion.getRegionWidth() / 2f,
-            hwood.body.getPosition().y - hwoodRegion.getRegionHeight() / 2f,
-            hwoodRegion.getRegionWidth() / 2f,
-            hwoodRegion.getRegionHeight() / 2f,
-            hwoodRegion.getRegionWidth(),
-            hwoodRegion.getRegionHeight(),
-            1, 1,
-            (float) Math.toDegrees(hwood.body.getAngle()));
-
-//        game.batch.draw(vglass.texture, vglass.body.getPosition().x - vglass.texture.getWidth() / 2f, vglass.body.getPosition().y - vglass.texture.getHeight() / 2f);
-//        game.batch.draw(hstone.texture, hstone.body.getPosition().x - hstone.texture.getWidth() / 2f, hstone.body.getPosition().y - hstone.texture.getHeight() / 2f);
-
-        game.batch.draw(vglassRegion,
-            vglass.body.getPosition().x - vglassRegion.getRegionWidth() / 2f,
-            vglass.body.getPosition().y - vglassRegion.getRegionHeight() / 2f,
-            vglassRegion.getRegionWidth() / 2f,
-            vglassRegion.getRegionHeight() / 2f,
-            vglassRegion.getRegionWidth(),
-            vglassRegion.getRegionHeight(),
-            1, 1,
-            (float) Math.toDegrees(vglass.body.getAngle()));
-
-        // Draw hstone with rotation
-        game.batch.draw(hstoneRegion,
-            hstone.body.getPosition().x - hstoneRegion.getRegionWidth() / 2f,
-            hstone.body.getPosition().y - hstoneRegion.getRegionHeight() / 2f,
-            hstoneRegion.getRegionWidth() / 2f,
-            hstoneRegion.getRegionHeight() / 2f,
-            hstoneRegion.getRegionWidth(),
-            hstoneRegion.getRegionHeight(),
-            1, 1,
-            (float) Math.toDegrees(hstone.body.getAngle()));
-
-        game.batch.draw(redBirdRegion,
-            redBird.body.getPosition().x - redBirdRegion.getRegionWidth() / 2f-4f,
-            redBird.body.getPosition().y - redBirdRegion.getRegionHeight() / 2f+2f,
-            redBirdRegion.getRegionWidth() / 2f,
-            redBirdRegion.getRegionHeight() / 2f,
-            redBirdRegion.getRegionWidth(),
-            redBirdRegion.getRegionHeight(),
-            1, 1,
-            (float) Math.toDegrees(redBird.body.getAngle()));
-
-
-        //game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
-        //game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
-        //game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);
@@ -182,6 +137,7 @@ public class Level1Screen implements Screen {
             }
         }
         game.batch.end();
+
         world.step(1 / 60f, 6, 2);
         world.step(1 / 60f, 6, 2);
         world.step(1 / 60f, 6, 2);

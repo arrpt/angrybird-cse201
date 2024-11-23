@@ -9,12 +9,13 @@ public class Hglass {
     public FixtureDef fixture;
     public Texture texture;
 
-    public Hglass(){
+    public Hglass(World world, float x, float y){
         health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
         texture = new Texture("hglass1.png");
+        createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){

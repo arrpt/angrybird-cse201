@@ -1,5 +1,8 @@
 package com.github.angrybird;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class RedBird extends Bird {
@@ -8,13 +11,16 @@ public class RedBird extends Bird {
     public BodyDef bodyDef;
     public FixtureDef fixture;
     public Texture texture;
+    public TextureRegion textureRegion;
 
-    public RedBird(){
+    public RedBird(World world, float x, float y){
         health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
         texture = new Texture("red1.png");
+        textureRegion = new TextureRegion(texture);
+        createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
@@ -34,6 +40,19 @@ public class RedBird extends Bird {
         body.setUserData(this);
         c.dispose();
     }
+
+    public void render(SpriteBatch batch){
+        batch.draw(textureRegion,
+            body.getPosition().x - textureRegion.getRegionWidth() / 2f-4f,
+            body.getPosition().y - textureRegion.getRegionHeight() / 2f+2f,
+            textureRegion.getRegionWidth() / 2f,
+            textureRegion.getRegionHeight() / 2f,
+            textureRegion.getRegionWidth(),
+            textureRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(body.getAngle()));
+    }
+
 
 //    public void setGravityScale(float gravityScale){
 //        body.setGravityScale(gravityScale);

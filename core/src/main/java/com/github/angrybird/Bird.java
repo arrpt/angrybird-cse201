@@ -1,6 +1,7 @@
 package com.github.angrybird;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class Bird {
@@ -17,6 +18,6 @@ public abstract class Bird {
     }
 
     public abstract void createBody(World world, float x, float y);
-    //public abstract void setGravityScale(float gravityScale);
+    public abstract void render(SpriteBatch batch);
     public abstract void dispose();
 }

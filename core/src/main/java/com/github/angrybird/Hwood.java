@@ -1,5 +1,7 @@
 package com.github.angrybird;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Hwood {
@@ -8,13 +10,16 @@ public class Hwood {
     public BodyDef bodyDef;
     public FixtureDef fixture;
     public Texture texture;
+    TextureRegion textureRegion;
 
-    public Hwood(){
+    public Hwood(World world, float x, float y){
         health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
         texture = new Texture("hwood1.png");
+        textureRegion = new TextureRegion(texture);
+        createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
@@ -35,6 +40,19 @@ public class Hwood {
         body.setGravityScale(1);
         body.setUserData(this);
         rectangle.dispose();
+    }
+
+    public void render(SpriteBatch batch){
+
+        batch.draw(textureRegion,
+            body.getPosition().x - textureRegion.getRegionWidth() / 2f,
+            body.getPosition().y - textureRegion.getRegionHeight() / 2f,
+            textureRegion.getRegionWidth() / 2f,
+            textureRegion.getRegionHeight() / 2f,
+            textureRegion.getRegionWidth(),
+            textureRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(body.getAngle()));
     }
 
 //    public void setGravityScale(float gravityScale){

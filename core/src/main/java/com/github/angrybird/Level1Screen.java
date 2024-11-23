@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Level1Screen implements Screen {
@@ -85,11 +86,13 @@ public class Level1Screen implements Screen {
         game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
         game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
-        font.draw(game.batch, "nigger", 10, 710);
+        font.draw(game.batch, "nicer", 10, 710);
         //change to pauseButton2 if hover
 
         if (Gdx.input.isTouched()) {
+
             slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), redBird.body);
+            slingshot.calculateTrajectory(redBird.body, 50, game.batch);
         } else if (slingshot.isPulled()) {
             slingshot.release(redBird.body);
             redBird.body.setGravityScale(1);

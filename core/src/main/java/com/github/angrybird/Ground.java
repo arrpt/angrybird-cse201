@@ -23,7 +23,7 @@ public class Ground {
         fixture = new FixtureDef();
         fixture.shape = groundBox;
         fixture.density = 0.0f;
-        fixture.friction = 0.5f;
+        fixture.friction = 0.8f;
         fixture.restitution = 0.2f;
 
         body.createFixture(fixture);

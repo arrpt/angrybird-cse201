@@ -32,7 +32,7 @@ public class Hstone {
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
-        body.setGravityScale(0);
+        body.setGravityScale(1);
         body.setUserData(this);
         rectangle.dispose();
     }

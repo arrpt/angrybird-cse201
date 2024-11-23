@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -54,9 +55,10 @@ public class Level1Screen implements Screen {
         //red1 = new Texture("red1.png");
         //yellow1 = new Texture("yellow1.png");
         //bigRed1 = new Texture("bigred1.png");
-        //vstone1 = new Texture("vstone1.png");
-        //vwood1 = new Texture("vwood1.png");
-        //hglass1 = new Texture("hglass1.png");
+        vstone1 = new Texture("vstone1.png");
+        vwood1 = new Texture("vwood1.png");
+        hglass1 = new Texture("hglass1.png");
+
 
         slingshot = new Slingshot(250f, 635f-455f+130f);
 
@@ -99,14 +101,62 @@ public class Level1Screen implements Screen {
         game.batch.draw(vstone1,800f,635f-455f, 22f, 212f);
         game.batch.draw(vwood1, 800f+212f-22f, 635f-455f, 22f, 212f);
         //game.batch.draw(hglass1, 800f, 635f-455f+212f, 212f, 22f);
-        game.batch.draw(hwood.texture, hwood.body.getPosition().x - hwood.texture.getWidth() / 2f, hwood.body.getPosition().y - hwood.texture.getHeight() / 2f);
-        game.batch.draw(vglass.texture, vglass.body.getPosition().x - vglass.texture.getWidth() / 2f, vglass.body.getPosition().y - vglass.texture.getHeight() / 2f);
-        game.batch.draw(hstone.texture, hstone.body.getPosition().x - hstone.texture.getWidth() / 2f, hstone.body.getPosition().y - hstone.texture.getHeight() / 2f);
+        //game.batch.draw(hwood.texture, hwood.body.getPosition().x - hwood.texture.getWidth() / 2f, hwood.body.getPosition().y - hwood.texture.getHeight() / 2f);
+
+        TextureRegion hwoodRegion = new TextureRegion(hwood.texture);
+        TextureRegion vglassRegion = new TextureRegion(vglass.texture);
+        TextureRegion hstoneRegion = new TextureRegion(hstone.texture);
+        TextureRegion redBirdRegion = new TextureRegion(redBird.texture);
+
+        game.batch.draw(hwoodRegion,
+            hwood.body.getPosition().x - hwoodRegion.getRegionWidth() / 2f,
+            hwood.body.getPosition().y - hwoodRegion.getRegionHeight() / 2f,
+            hwoodRegion.getRegionWidth() / 2f,
+            hwoodRegion.getRegionHeight() / 2f,
+            hwoodRegion.getRegionWidth(),
+            hwoodRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(hwood.body.getAngle()));
+
+//        game.batch.draw(vglass.texture, vglass.body.getPosition().x - vglass.texture.getWidth() / 2f, vglass.body.getPosition().y - vglass.texture.getHeight() / 2f);
+//        game.batch.draw(hstone.texture, hstone.body.getPosition().x - hstone.texture.getWidth() / 2f, hstone.body.getPosition().y - hstone.texture.getHeight() / 2f);
+
+        game.batch.draw(vglassRegion,
+            vglass.body.getPosition().x - vglassRegion.getRegionWidth() / 2f,
+            vglass.body.getPosition().y - vglassRegion.getRegionHeight() / 2f,
+            vglassRegion.getRegionWidth() / 2f,
+            vglassRegion.getRegionHeight() / 2f,
+            vglassRegion.getRegionWidth(),
+            vglassRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(vglass.body.getAngle()));
+
+        // Draw hstone with rotation
+        game.batch.draw(hstoneRegion,
+            hstone.body.getPosition().x - hstoneRegion.getRegionWidth() / 2f,
+            hstone.body.getPosition().y - hstoneRegion.getRegionHeight() / 2f,
+            hstoneRegion.getRegionWidth() / 2f,
+            hstoneRegion.getRegionHeight() / 2f,
+            hstoneRegion.getRegionWidth(),
+            hstoneRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(hstone.body.getAngle()));
+
+        game.batch.draw(redBirdRegion,
+            redBird.body.getPosition().x - redBirdRegion.getRegionWidth() / 2f,
+            redBird.body.getPosition().y - redBirdRegion.getRegionHeight() / 2f,
+            redBirdRegion.getRegionWidth() / 2f,
+            redBirdRegion.getRegionHeight() / 2f,
+            redBirdRegion.getRegionWidth(),
+            redBirdRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(redBird.body.getAngle()));
+
 
         //game.batch.draw(slingshot.rightSling, slingshot.getAnchorPoint().x, slingshot.getAnchorPoint().y, 50f, 50f);
-        game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
+        //game.batch.draw(redBird.texture, redBird.body.getPosition().x, redBird.body.getPosition().y);
         //game.batch.draw(slingshot.leftSling, slingshot.getAnchorPoint().x-50f, slingshot.getAnchorPoint().y, 50f, 50f);
-        game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
+        //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);
         //change to pauseButton2 if hover

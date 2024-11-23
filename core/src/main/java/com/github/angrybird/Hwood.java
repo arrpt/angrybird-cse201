@@ -22,7 +22,7 @@ public class Hwood {
         body = world.createBody(bodyDef);
         PolygonShape rectangle = new PolygonShape();
         float width = texture.getWidth()/2f;
-        float height = texture.getWidth()/2f;
+        float height = texture.getHeight()/2f;
         rectangle.setAsBox(width, height);
 
         fixture.shape = rectangle;
@@ -32,7 +32,7 @@ public class Hwood {
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
-        body.setGravityScale(0);
+        body.setGravityScale(1);
         body.setUserData(this);
         rectangle.dispose();
     }

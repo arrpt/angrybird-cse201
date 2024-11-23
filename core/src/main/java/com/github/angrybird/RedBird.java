@@ -21,11 +21,12 @@ public class RedBird extends Bird {
         bodyDef.position.set(x, y);
         body = world.createBody(bodyDef);
         CircleShape c = new CircleShape();
-        c.setRadius(5f);
+        c.setRadius(9f);
         fixture.shape = c;
         fixture.density = 1f;
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
+        body.setAngularDamping(5f);
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);

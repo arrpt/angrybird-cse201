@@ -41,7 +41,7 @@ public class Slingshot {
 
     public void release(Body birdBody) {
         if (isPulled) {
-            Vector2 force = anchorPoint.cpy().sub(pullPoint).scl(200); // Adjust the scaling factor as needed
+            Vector2 force = anchorPoint.cpy().sub(pullPoint).scl(400); // Adjust the scaling factor as needed
             birdBody.applyLinearImpulse(force, birdBody.getWorldCenter(), true);
 //            birdBody.setAwake(true);
 //            Vector2 additionalForce = force.scl(10000f);
@@ -75,7 +75,7 @@ public class Slingshot {
     public void calculateTrajectory(Body birdBody, int numPoints, SpriteBatch batch) {
         Texture target = new Texture("red1.png");
         Vector2 initialPosition = birdBody.getPosition();
-        Vector2 initialVelocity = anchorPoint.cpy().sub(pullPoint).scl(80); // Initial velocity
+        Vector2 initialVelocity = anchorPoint.cpy().sub(pullPoint).scl(400); // Initial velocity
         Vector2 gravity = birdBody.getWorld().getGravity();
         float timeStep = 1/60f; // Assuming 60 FPS
 

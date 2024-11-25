@@ -24,7 +24,7 @@ public class Slingshot {
         isPulled = false;
         //leftSling = new Texture("slingleft.png");
         //rightSling = new Texture("slingright.png");
-        sling = new Texture("sling.png");
+        //sling = new Texture("sling.png");
         maxRadius = 100;
     }
 

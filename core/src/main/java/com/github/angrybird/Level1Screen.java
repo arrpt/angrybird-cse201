@@ -27,11 +27,12 @@ import java.util.ArrayList;
 public class Level1Screen implements Screen {
 
     Main game;
+    public boolean started = false;
     private Texture sky;
     private Ground ground;
     private Texture pauseButton;
     private Texture pauseButton2;
-//    private Texture slingRight;
+    //    private Texture slingRight;
 //    private Texture slingLeft;
     private Texture sling;
     private Texture grass;
@@ -63,7 +64,7 @@ public class Level1Screen implements Screen {
     @Override
     public void show() {
         world = new World(new Vector2(0, -9.8f), true);
-        world.setContactListener(new GameContactListener(world, removeBody));
+        world.setContactListener(new GameContactListener(world, removeBody, this));
         //box2ddebugrenderer = new Box2DDebugRenderer();
         sky = new Texture("skyl1.png");
         //ground = new Texture("groundl1.png");
@@ -79,7 +80,7 @@ public class Level1Screen implements Screen {
         vstone1 = new Texture("vstone1.png");
         vwood1 = new Texture("vwood1.png");
         hglass1 = new Texture("hglass1.png");
-        
+
         slingshot = new Slingshot(250f, 635f-455f+130f);
 
         //Font here
@@ -108,7 +109,7 @@ public class Level1Screen implements Screen {
         birdQueue.addLast(chuck);
         birdQueue.addLast(terence);
         System.out.println("Size: "+birdQueue.size);
-       // renderObjects.add(redBird);
+        // renderObjects.add(redBird);
 //        renderObjects.add(hwood);
 //        renderObjects.add(vglass);
 //        renderObjects.add(hstone);
@@ -141,7 +142,7 @@ public class Level1Screen implements Screen {
 //
 //            }
 //        }
-       // AngryObject temp = renderObjects.get(0);
+        // AngryObject temp = renderObjects.get(0);
 //        System.out.println("Instance: "+temp.getClass().getName());
 //        System.out.println("if instance equal redBird: "+(temp instanceof RedBird));
 //        if (temp instanceof RedBird){
@@ -212,6 +213,7 @@ public class Level1Screen implements Screen {
                 birdQueue.first().isReleased=1;
                 birdQueue.first().body.setGravityScale(1);
                 //birdQueue.removeFirst();
+                started = true;
             }
         }
 

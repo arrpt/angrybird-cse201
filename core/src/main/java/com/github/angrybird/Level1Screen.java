@@ -24,9 +24,9 @@ import com.github.angrybird.pig.Pigga;
 
 import java.util.ArrayList;
 
-public class Level1Screen implements Screen {
+public class Level1Screen extends LevelScreen implements Screen {
 
-    Main game;
+    //Main game;
     public boolean started = false;
     private Texture sky;
     private Ground ground;
@@ -46,23 +46,28 @@ public class Level1Screen implements Screen {
     private Hwood hwood;
     private Vglass vglass;
     private Hstone hstone;
-    private Box2DDebugRenderer box2ddebugrenderer;
+//    private Box2DDebugRenderer box2ddebugrenderer;
     Chuck chuck;
     Terence terence;
     Pigga pigga;
     MustPig mustPig;
     KingPig kingPig;
 
+    private boolean initialized = false;
+
     public Queue<Bird> birdQueue = new Queue<>();
     public Queue<Body> removeBody = new Queue<>();
     //public ArrayList<AngryObject> renderObjects = new ArrayList<>();
 
     public Level1Screen(Main game){
-        this.game = game;
+        super(game);
     }
 
     @Override
     public void show() {
+        if(initialized){
+            return;
+        }
         world = new World(new Vector2(0, -9.8f), true);
         world.setContactListener(new GameContactListener(world, removeBody, this));
         //box2ddebugrenderer = new Box2DDebugRenderer();
@@ -102,12 +107,13 @@ public class Level1Screen implements Screen {
         pigga = new Pigga(world, 200f+300f, 635f-455f+130f);
         mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
         kingPig = new KingPig(world, 200f+500f, 635f-455f+130f);
-        box2ddebugrenderer = new Box2DDebugRenderer();
+//        box2ddebugrenderer = new Box2DDebugRenderer();
 
         //birdQueue = new Queue<>();
         birdQueue.addLast(redBird);
         birdQueue.addLast(chuck);
         birdQueue.addLast(terence);
+        initialized=true;
         System.out.println("Size: "+birdQueue.size);
         // renderObjects.add(redBird);
 //        renderObjects.add(hwood);
@@ -230,8 +236,8 @@ public class Level1Screen implements Screen {
         if(Gdx.input.getX()>1220f && Gdx.input.getX()<1270f && 720f-Gdx.input.getY()>660f && 720f-Gdx.input.getY()<710f){
             game.batch.draw(pauseButton2, 1220f, 660f, 50f, 50f);
             if(Gdx.input.isTouched()){
-                game.setScreen(new PauseScreen(game));
-                dispose();
+                game.setScreen(new PauseScreen(game, this));
+                //dispose();
             }
         }
         game.batch.end();
@@ -242,7 +248,7 @@ public class Level1Screen implements Screen {
         world.step(1 / 60f, 6, 2);
         world.step(1 / 60f, 6, 2);
         world.step(1 / 60f, 6, 2);
-        box2ddebugrenderer.render(world, game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
+//        box2ddebugrenderer.render(world, game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
     }
 
     @Override
@@ -268,7 +274,7 @@ public class Level1Screen implements Screen {
     @Override
     public void dispose() {
         world.dispose();
-        box2ddebugrenderer.dispose();
+//        box2ddebugrenderer.dispose();
     }
 
 //    private void createGroundBody() {

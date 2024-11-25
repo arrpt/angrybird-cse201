@@ -16,11 +16,13 @@ public class PauseScreen implements Screen {
     private Texture home2;
     private Texture restart1;
     private Texture restart2;
+    private LevelScreen levelScreen;
 
 
 
-    public PauseScreen(Main game){
+    public PauseScreen(Main game, LevelScreen levelScreen){
         this.game = game;
+        this.levelScreen = levelScreen;
     }
     @Override
     public void show() {
@@ -68,7 +70,7 @@ public class PauseScreen implements Screen {
         if(Gdx.input.getX()>640f-43f && Gdx.input.getX()<640f-43f+86f && 720f-Gdx.input.getY()>360f-(376f/2f)+(155f)-86f && 720f-Gdx.input.getY()<360f-(376f/2f)+(155f)){
             game.batch.draw(resume2,640f-43f,360f-(376f/2f)+(155f)-86f,86f,86f);
             if(Gdx.input.isTouched()){
-                game.setScreen(new Level1Screen(game));
+                game.setScreen(levelScreen);
                 dispose();
             }
         }

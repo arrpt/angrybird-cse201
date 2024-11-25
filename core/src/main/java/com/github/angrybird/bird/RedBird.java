@@ -25,7 +25,7 @@ public class RedBird extends Bird {
         fixture.shape = c;
         fixture.density = 1f;
         fixture.friction = 0.5f;
-        fixture.restitution = 0.6f;
+        fixture.restitution = 0.3f;
         body.setAngularDamping(5f);
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);

@@ -27,7 +27,7 @@ public class Hglass extends Material {
         fixture.shape = rectangle;
         fixture.density = 1f;
         fixture.friction = 0.5f;
-        fixture.restitution = 0.6f;
+        fixture.restitution = 0.1f;
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
@@ -37,6 +37,7 @@ public class Hglass extends Material {
     }
 
     public void render(SpriteBatch batch){
+        if (isVisible == 0) return;
         batch.draw(textureRegion,
             body.getPosition().x - textureRegion.getRegionWidth() / 2f,
             body.getPosition().y - textureRegion.getRegionHeight() / 2f,

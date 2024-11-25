@@ -35,9 +35,9 @@ public class Slingshot {
         }
         pullPoint.set(newPullPoint);
         isPulled = true;
-        birdBody.setTransform(pullPoint, birdBody.getAngle());
-
-
+        birdBody.setTransform(pullPoint, 0);
+        birdBody.setLinearVelocity(0,0);
+        birdBody.setAngularVelocity(0);
     }
 
     public void release(Body birdBody) {
@@ -65,11 +65,17 @@ public class Slingshot {
             @Override
             public void run() {
                 elapsedTime += Gdx.graphics.getDeltaTime();
-                float alpha = Math.min(3, elapsedTime / duration);
+                float alpha = Math.min(1, elapsedTime / duration);
                 Vector2 newPosition = startPosition.lerp(targetPosition, Interpolation.linear.apply(alpha));
-                bird.body.setTransform(newPosition, bird.body.getAngle());
+                bird.body.setTransform(newPosition, 0);
+                bird.body.setLinearVelocity(0, 0); // Reset linear velocity
+                bird.body.setAngularVelocity(0); // Reset angular velocity
+                bird.body.setGravityScale(0);
 
-                if (alpha >= 2.5) {
+                if (alpha >= 1) {
+                    bird.body.setLinearVelocity(0, 0); // Reset linear velocity
+                    bird.body.setAngularVelocity(0); // Reset angular velocity
+                    bird.body.setGravityScale(0);
                     this.cancel();
                 }
             }

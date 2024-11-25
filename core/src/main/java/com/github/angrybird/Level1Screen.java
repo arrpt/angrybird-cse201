@@ -54,7 +54,7 @@ public class Level1Screen implements Screen {
 
     public Queue<Bird> birdQueue = new Queue<>();
     public Queue<Body> removeBody = new Queue<>();
-    public ArrayList<AngryObject> renderObjects = new ArrayList<>();
+    //public ArrayList<AngryObject> renderObjects = new ArrayList<>();
 
     public Level1Screen(Main game){
         this.game = game;
@@ -79,8 +79,7 @@ public class Level1Screen implements Screen {
         vstone1 = new Texture("vstone1.png");
         vwood1 = new Texture("vwood1.png");
         hglass1 = new Texture("hglass1.png");
-
-
+        
         slingshot = new Slingshot(250f, 635f-455f+130f);
 
         //Font here
@@ -92,7 +91,7 @@ public class Level1Screen implements Screen {
         font = fontGenerator.generateFont(parameter);
         fontGenerator.dispose();
 
-        redBird = new RedBird(world, 200f, 635f-455f+130f);
+        redBird = new RedBird(world, 250f, 635f-455f+130f);
         hwood = new Hwood(world, 800f, 635f-455f);
         vglass = new Vglass(world, 800f, 635f-455f+212f);
         hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
@@ -109,7 +108,7 @@ public class Level1Screen implements Screen {
         birdQueue.addLast(chuck);
         birdQueue.addLast(terence);
         System.out.println("Size: "+birdQueue.size);
-        renderObjects.add(redBird);
+       // renderObjects.add(redBird);
 //        renderObjects.add(hwood);
 //        renderObjects.add(vglass);
 //        renderObjects.add(hstone);
@@ -127,10 +126,10 @@ public class Level1Screen implements Screen {
         ScreenUtils.clear(Color.BLACK);
         game.batch.begin();
 
-//        for (int i = 0; i < removeBody.size; i++) {
-//            Body body = removeBody.removeFirst();
-//            world.destroyBody(body);
-//        }
+        for (int i = 0; i < removeBody.size; i++) {
+            Body body = removeBody.removeFirst();
+            world.destroyBody(body);
+        }
 //
 //        for (AngryObject object : renderObjects) {
 //            System.out.println("Instance: "+object.getClass().getName());
@@ -142,14 +141,15 @@ public class Level1Screen implements Screen {
 //
 //            }
 //        }
-        AngryObject temp = renderObjects.get(0);
-        System.out.println("Instance: "+temp.getClass().getName());
-        System.out.println("if instance equal redBird: "+(temp instanceof RedBird));
-        if (temp instanceof RedBird){
-            RedBird temp2 = (RedBird) temp;
-            temp2.render(game.batch);
-
-        }
+       // AngryObject temp = renderObjects.get(0);
+//        System.out.println("Instance: "+temp.getClass().getName());
+//        System.out.println("if instance equal redBird: "+(temp instanceof RedBird));
+//        if (temp instanceof RedBird){
+//            RedBird temp2 = (RedBird) temp;
+//            temp2.render(game.batch);
+//
+//        }
+//        System.out.println(temp.equals(redBird));
         game.batch.draw(sky, 0, 0, 1280f, 720f);
         game.batch.draw(ground.texture, 0, -450f, 1280f, 635f);
         game.batch.draw(pauseButton, 1220f, 660f, 50f, 50f);
@@ -157,16 +157,17 @@ public class Level1Screen implements Screen {
         //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
 
         game.batch.draw(sling,200f,635f-455f,92f,170f);
+
         //((AngryObject)redBird).render(game.batch);
-//        hwood.render(game.batch);
-//        vglass.render(game.batch);
-//        hstone.render(game.batch);
-//        chuck.render(game.batch);
-//        terence.render(game.batch);
-//        pigga.render(game.batch);
-//        mustPig.render(game.batch);
-//        kingPig.render(game.batch);
-        //redBird.render(game.batch);
+        hwood.render(game.batch);
+        vglass.render(game.batch);
+        hstone.render(game.batch);
+        chuck.render(game.batch);
+        terence.render(game.batch);
+        pigga.render(game.batch);
+        mustPig.render(game.batch);
+        kingPig.render(game.batch);
+        redBird.render(game.batch);
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);

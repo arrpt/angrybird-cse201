@@ -36,6 +36,7 @@ public class KingPig extends Pig{
     }
 
     public void render(SpriteBatch batch){
+        if (isVisible == 0) return;
         batch.draw(textureRegion,
             body.getPosition().x - textureRegion.getRegionWidth() / 2f+2f,
             body.getPosition().y - textureRegion.getRegionHeight() / 2f+6f,

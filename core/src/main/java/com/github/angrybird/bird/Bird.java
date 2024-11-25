@@ -1,26 +1,22 @@
-package com.github.angrybird;
+package com.github.angrybird.bird;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+import com.github.angrybird.AngryObject;
 
-public abstract class Bird {
+public abstract class Bird extends AngryObject {
     public int health;
+    public int isReleased;
     public Body body;
     public BodyDef bodyDef;
     public FixtureDef fixture;
     public Texture texture;
     public TextureRegion textureRegion;
-    public int isReleased;
+
     public Bird() {
-//        bodyDef = new BodyDef();
-//        bodyDef.type = BodyDef.BodyType.DynamicBody;
-//        fixture = new FixtureDef();
+        super();
         isReleased=0;
     }
-
-    public abstract void createBody(World world, float x, float y);
-    public abstract void render(SpriteBatch batch);
-    public abstract void dispose();
 }

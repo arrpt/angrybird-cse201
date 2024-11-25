@@ -1,36 +1,29 @@
-package com.github.angrybird;
+package com.github.angrybird.pig;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Terence extends Bird {
-//    public int health;
-//    public Body body;
-//    public BodyDef bodyDef;
-//    public FixtureDef fixture;
-//    public Texture texture;
-//    public TextureRegion textureRegion;
+public class KingPig extends Pig{
 
-    public Terence(World world, float x, float y){
+    public KingPig(World world, float x, float y){
         super();
-        super.health = 100;
-        super.bodyDef = new BodyDef();
-        super.bodyDef.type = BodyDef.BodyType.DynamicBody;
-        super.fixture = new FixtureDef();
-        super.texture = new Texture("bigred1.png");
-        super.textureRegion = new TextureRegion(texture);
+        health = 100;
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        fixture = new FixtureDef();
+        texture = new Texture("kingpig1.png");
+        textureRegion = new TextureRegion(texture);
         createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
         bodyDef.position.set(x, y);
-        super.body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
         CircleShape c = new CircleShape();
-        c.setRadius(37f);
+        c.setRadius(20f);
         fixture.shape = c;
-        fixture.density = 0.17f;
+        fixture.density = 1f;
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
         body.setAngularDamping(5f);
@@ -44,13 +37,13 @@ public class Terence extends Bird {
 
     public void render(SpriteBatch batch){
         batch.draw(textureRegion,
-            body.getPosition().x - textureRegion.getRegionWidth() / 2f-4f,
-            body.getPosition().y - textureRegion.getRegionHeight() / 2f+5f,
+            body.getPosition().x - textureRegion.getRegionWidth() / 2f+2f,
+            body.getPosition().y - textureRegion.getRegionHeight() / 2f+6f,
             textureRegion.getRegionWidth() / 2f,
             textureRegion.getRegionHeight() / 2f,
             textureRegion.getRegionWidth(),
             textureRegion.getRegionHeight(),
-            1f, 1f,
+            1/3f, 1/3f,
             (float) Math.toDegrees(body.getAngle()));
     }
 

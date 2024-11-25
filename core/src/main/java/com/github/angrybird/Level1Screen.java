@@ -5,16 +5,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import com.badlogic.gdx.utils.Queue;
+import com.github.angrybird.bird.Bird;
+import com.github.angrybird.bird.Chuck;
+import com.github.angrybird.bird.RedBird;
+import com.github.angrybird.bird.Terence;
+import com.github.angrybird.material.Hstone;
+import com.github.angrybird.material.Hwood;
+import com.github.angrybird.material.Vglass;
+import com.github.angrybird.pig.KingPig;
+import com.github.angrybird.pig.MustPig;
+import com.github.angrybird.pig.Pigga;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Level1Screen implements Screen {
 
@@ -45,7 +53,8 @@ public class Level1Screen implements Screen {
     KingPig kingPig;
 
     public Queue<Bird> birdQueue = new Queue<>();
-
+    public Queue<Body> removeBody = new Queue<>();
+    public ArrayList<AngryObject> renderObjects = new ArrayList<>();
 
     public Level1Screen(Main game){
         this.game = game;
@@ -54,7 +63,7 @@ public class Level1Screen implements Screen {
     @Override
     public void show() {
         world = new World(new Vector2(0, -9.8f), true);
-        world.setContactListener(new GameContactListener());
+        world.setContactListener(new GameContactListener(world, removeBody));
         //box2ddebugrenderer = new Box2DDebugRenderer();
         sky = new Texture("skyl1.png");
         //ground = new Texture("groundl1.png");
@@ -100,8 +109,15 @@ public class Level1Screen implements Screen {
         birdQueue.addLast(chuck);
         birdQueue.addLast(terence);
         System.out.println("Size: "+birdQueue.size);
-
-
+        renderObjects.add(redBird);
+//        renderObjects.add(hwood);
+//        renderObjects.add(vglass);
+//        renderObjects.add(hstone);
+//        renderObjects.add(chuck);
+//        renderObjects.add(terence);
+//        renderObjects.add(pigga);
+//        renderObjects.add(mustPig);
+//        renderObjects.add(kingPig);
 
     }
 
@@ -110,6 +126,30 @@ public class Level1Screen implements Screen {
 
         ScreenUtils.clear(Color.BLACK);
         game.batch.begin();
+
+//        for (int i = 0; i < removeBody.size; i++) {
+//            Body body = removeBody.removeFirst();
+//            world.destroyBody(body);
+//        }
+//
+//        for (AngryObject object : renderObjects) {
+//            System.out.println("Instance: "+object.getClass().getName());
+//            System.out.println("isVisible: "+object.isVisible);
+//            if (object.isVisible == 1) {
+//                if (object instanceof RedBird){
+//                    ((RedBird)object).render(game.batch);
+//                }
+//
+//            }
+//        }
+        AngryObject temp = renderObjects.get(0);
+        System.out.println("Instance: "+temp.getClass().getName());
+        System.out.println("if instance equal redBird: "+(temp instanceof RedBird));
+        if (temp instanceof RedBird){
+            RedBird temp2 = (RedBird) temp;
+            temp2.render(game.batch);
+
+        }
         game.batch.draw(sky, 0, 0, 1280f, 720f);
         game.batch.draw(ground.texture, 0, -450f, 1280f, 635f);
         game.batch.draw(pauseButton, 1220f, 660f, 50f, 50f);
@@ -117,16 +157,16 @@ public class Level1Screen implements Screen {
         //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
 
         game.batch.draw(sling,200f,635f-455f,92f,170f);
-        redBird.render(game.batch);
-        hwood.render(game.batch);
-        vglass.render(game.batch);
-        hstone.render(game.batch);
-        chuck.render(game.batch);
-        terence.render(game.batch);
-        pigga.render(game.batch);
-        mustPig.render(game.batch);
-        kingPig.render(game.batch);
-
+        //((AngryObject)redBird).render(game.batch);
+//        hwood.render(game.batch);
+//        vglass.render(game.batch);
+//        hstone.render(game.batch);
+//        chuck.render(game.batch);
+//        terence.render(game.batch);
+//        pigga.render(game.batch);
+//        mustPig.render(game.batch);
+//        kingPig.render(game.batch);
+        //redBird.render(game.batch);
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);

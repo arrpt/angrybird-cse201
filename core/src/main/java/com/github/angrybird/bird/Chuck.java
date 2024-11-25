@@ -1,32 +1,25 @@
-package com.github.angrybird;
+package com.github.angrybird.bird;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Chuck extends Bird {
-//    public int health;
-//    public Body body;
-//    public BodyDef bodyDef;
-//    public FixtureDef fixture;
-//    public Texture texture;
-//    public TextureRegion textureRegion;
 
     public Chuck(World world, float x, float y){
         super();
-        super.health = 100;
-        super.bodyDef = new BodyDef();
-        super.bodyDef.type = BodyDef.BodyType.DynamicBody;
-        super.fixture = new FixtureDef();
-        super.texture = new Texture("yellow1.png");
-        super.textureRegion = new TextureRegion(texture);
+        health = 100;
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        fixture = new FixtureDef();
+        texture = new Texture("yellow1.png");
+        textureRegion = new TextureRegion(texture);
         createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
         bodyDef.position.set(x, y);
-        super.body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
         CircleShape c = new CircleShape();
         c.setRadius(20f);
         fixture.shape = c;

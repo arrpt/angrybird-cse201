@@ -1,59 +1,52 @@
-package com.github.angrybird;
+package com.github.angrybird.pig;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Hstone {
-    public int health;
-    public Body body;
-    public BodyDef bodyDef;
-    public FixtureDef fixture;
-    public Texture texture;
-    public TextureRegion textureRegion;
+public class MustPig extends Pig {
 
-    public Hstone(World world, float x, float y){
+    public MustPig(World world, float x, float y){
+        super();
         health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
-        texture = new Texture("hstone1.png");
+        texture = new Texture("mustpig1.png");
         textureRegion = new TextureRegion(texture);
-
         createBody(world, x, y);
     }
 
     public void createBody(World world, float x, float y){
         bodyDef.position.set(x, y);
         body = world.createBody(bodyDef);
-        PolygonShape rectangle = new PolygonShape();
-        float width = texture.getWidth()/2f;
-        float height = texture.getHeight()/2f;
-        rectangle.setAsBox(width, height);
-
-        fixture.shape = rectangle;
+        CircleShape c = new CircleShape();
+        c.setRadius(16f);
+        fixture.shape = c;
         fixture.density = 1f;
         fixture.friction = 0.5f;
         fixture.restitution = 0.6f;
+        body.setAngularDamping(5f);
         body.createFixture(fixture);
         body.setLinearVelocity(0, 0);
         body.setAngularVelocity(0);
         body.setGravityScale(1);
         body.setUserData(this);
-        rectangle.dispose();
+        c.dispose();
     }
 
     public void render(SpriteBatch batch){
         batch.draw(textureRegion,
-            body.getPosition().x - textureRegion.getRegionWidth() / 2f,
-            body.getPosition().y - textureRegion.getRegionHeight() / 2f,
+            body.getPosition().x - textureRegion.getRegionWidth() / 2f+2f,
+            body.getPosition().y - textureRegion.getRegionHeight() / 2f+1f,
             textureRegion.getRegionWidth() / 2f,
             textureRegion.getRegionHeight() / 2f,
             textureRegion.getRegionWidth(),
             textureRegion.getRegionHeight(),
-            1, 1,
+            1/3f, 1/3f,
             (float) Math.toDegrees(body.getAngle()));
     }
+
 
 //    public void setGravityScale(float gravityScale){
 //        body.setGravityScale(gravityScale);

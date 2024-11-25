@@ -1,20 +1,19 @@
-package com.github.angrybird;
+package com.github.angrybird.material;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Hglass {
-    public int health;
-    public Body body;
-    public BodyDef bodyDef;
-    public FixtureDef fixture;
-    public Texture texture;
+public class Hwood extends Material {
 
-    public Hglass(World world, float x, float y){
+    public Hwood(World world, float x, float y){
+        super();
         health = 100;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
-        texture = new Texture("hglass1.png");
+        texture = new Texture("hwood1.png");
+        textureRegion = new TextureRegion(texture);
         createBody(world, x, y);
     }
 
@@ -36,6 +35,19 @@ public class Hglass {
         body.setGravityScale(1);
         body.setUserData(this);
         rectangle.dispose();
+    }
+
+    public void render(SpriteBatch batch){
+
+        batch.draw(textureRegion,
+            body.getPosition().x - textureRegion.getRegionWidth() / 2f,
+            body.getPosition().y - textureRegion.getRegionHeight() / 2f,
+            textureRegion.getRegionWidth() / 2f,
+            textureRegion.getRegionHeight() / 2f,
+            textureRegion.getRegionWidth(),
+            textureRegion.getRegionHeight(),
+            1, 1,
+            (float) Math.toDegrees(body.getAngle()));
     }
 
 //    public void setGravityScale(float gravityScale){

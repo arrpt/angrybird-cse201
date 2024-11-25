@@ -23,7 +23,7 @@ public class Main extends Game {
     public void create() {
         batch = new SpriteBatch();
         bgmusic = Gdx.audio.newMusic(Gdx.files.internal("intro2.mp3"));
-        //bgmusic.play();
+        bgmusic.play();
         this.setScreen(new StartupScreen(this));
     }
 

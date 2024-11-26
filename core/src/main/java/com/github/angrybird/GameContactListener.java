@@ -12,10 +12,10 @@ import static java.lang.Math.min;
 public class GameContactListener implements ContactListener {
     private final World world;
     public Queue<Body> removeBody;
-    Level1Screen screen;
+    LevelScreen screen;
 
 
-    public GameContactListener(World world, Queue<Body> removeBody, Level1Screen screen) {
+    public GameContactListener(World world, Queue<Body> removeBody, LevelScreen screen) {
         this.world = world;
         this.removeBody = removeBody;
         this.screen = screen;

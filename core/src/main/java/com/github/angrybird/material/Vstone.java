@@ -8,7 +8,7 @@ public class Vstone extends Material {
 
     public Vstone(World world, float x, float y){
         super();
-        health = 100;
+        health = 300;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();

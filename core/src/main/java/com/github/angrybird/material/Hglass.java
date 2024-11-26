@@ -1,6 +1,7 @@
 package com.github.angrybird.material;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Hglass extends Material {
@@ -12,6 +13,7 @@ public class Hglass extends Material {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();
         texture = new Texture("hglass1.png");
+        textureRegion = new TextureRegion(texture);
         createBody(world, x, y);
     }
 

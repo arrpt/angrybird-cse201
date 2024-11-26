@@ -8,7 +8,7 @@ public class MustPig extends Pig {
 
     public MustPig(World world, float x, float y){
         super();
-        health = 100;
+        health = 200;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();

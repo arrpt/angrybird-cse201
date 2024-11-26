@@ -3,10 +3,12 @@ package com.github.angrybird;
 import com.badlogic.gdx.Screen;
 
 public class LevelScreen implements Screen {
+    public boolean started;
     Main game;
 
     public LevelScreen(Main game){
         this.game = game;
+        this.started = false;
     }
 
     @Override

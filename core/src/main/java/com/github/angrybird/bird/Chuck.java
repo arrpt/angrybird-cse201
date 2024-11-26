@@ -8,7 +8,7 @@ public class Chuck extends Bird {
 
     public Chuck(World world, float x, float y){
         super();
-        health = 100;
+        health = 200;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();

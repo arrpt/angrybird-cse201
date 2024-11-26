@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class Level1Screen extends LevelScreen implements Screen {
 
     //Main game;
-    public boolean started = false;
+    //public boolean started = false;
     private Texture sky;
     private Ground ground;
     private Texture pauseButton;
@@ -44,14 +44,16 @@ public class Level1Screen extends LevelScreen implements Screen {
     private Slingshot slingshot;
     private BitmapFont font;
     private Hwood hwood;
-    private Vglass vglass;
+    private Vglass vglass1;
+    private Vglass vglass2;
     private Hstone hstone;
 //    private Box2DDebugRenderer box2ddebugrenderer;
-    Chuck chuck;
-    Terence terence;
-    Pigga pigga;
-    MustPig mustPig;
-    KingPig kingPig;
+    RedBird redBird2;
+//    Terence terence;
+    Pigga pigga1;
+    Pigga pigga2;
+    //MustPig mustPig;
+//    KingPig kingPig;
 
     private boolean initialized = false;
 
@@ -97,33 +99,34 @@ public class Level1Screen extends LevelScreen implements Screen {
         font = fontGenerator.generateFont(parameter);
         fontGenerator.dispose();
 
+
+        //birds
         redBird = new RedBird(world, 250f, 635f-455f+130f);
-        hwood = new Hwood(world, 800f, 635f-455f);
-        vglass = new Vglass(world, 800f, 635f-455f+212f);
-        hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
-        ground = new Ground(world);
-        chuck = new Chuck(world, 200f - 70f, 635f-455f+130f);
-        terence = new Terence(world, 200f - 150f, 635f-455f+130f);
-        pigga = new Pigga(world, 200f+300f, 635f-455f+130f);
-        mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
-        kingPig = new KingPig(world, 200f+500f, 635f-455f+130f);
+        redBird2 = new RedBird(world, 200f - 70f, 635f-455f);
+//        terence = new Terence(world, 200f - 150f, 635f-455f+130f);
+
+        //materials
+        hwood = new Hwood(world, 800f, 635f-455f+212f+95f);
+        vglass1 = new Vglass(world, 800f-106f+11f, 635f-455f+106f);
+        vglass2= new Vglass(world, 800f+106f-11f, 635f-455f+106f);
+        //hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
+
+        //pigs
+        pigga1 = new Pigga(world, 800, 635f-455f+130f);
+        pigga2 = new Pigga(world, 800f, 635f-455f+212f+100f);
+//        mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
+//        kingPig = new KingPig(world, 200f+450f, 635f-455f+130f);
 //        box2ddebugrenderer = new Box2DDebugRenderer();
+
+        ground = new Ground(world);
 
         //birdQueue = new Queue<>();
         birdQueue.addLast(redBird);
-        birdQueue.addLast(chuck);
-        birdQueue.addLast(terence);
+        birdQueue.addLast(redBird2);
+//        birdQueue.addLast(terence);
         initialized=true;
         System.out.println("Size: "+birdQueue.size);
-        // renderObjects.add(redBird);
-//        renderObjects.add(hwood);
-//        renderObjects.add(vglass);
-//        renderObjects.add(hstone);
-//        renderObjects.add(chuck);
-//        renderObjects.add(terence);
-//        renderObjects.add(pigga);
-//        renderObjects.add(mustPig);
-//        renderObjects.add(kingPig);
+
 
     }
 
@@ -137,79 +140,31 @@ public class Level1Screen extends LevelScreen implements Screen {
             Body body = removeBody.removeFirst();
             world.destroyBody(body);
         }
-//
-//        for (AngryObject object : renderObjects) {
-//            System.out.println("Instance: "+object.getClass().getName());
-//            System.out.println("isVisible: "+object.isVisible);
-//            if (object.isVisible == 1) {
-//                if (object instanceof RedBird){
-//                    ((RedBird)object).render(game.batch);
-//                }
-//
-//            }
-//        }
-        // AngryObject temp = renderObjects.get(0);
-//        System.out.println("Instance: "+temp.getClass().getName());
-//        System.out.println("if instance equal redBird: "+(temp instanceof RedBird));
-//        if (temp instanceof RedBird){
-//            RedBird temp2 = (RedBird) temp;
-//            temp2.render(game.batch);
-//
-//        }
-//        System.out.println(temp.equals(redBird));
+
+
         game.batch.draw(sky, 0, 0, 1280f, 720f);
         game.batch.draw(ground.texture, 0, -450f, 1280f, 635f);
         game.batch.draw(pauseButton, 1220f, 660f, 50f, 50f);
-        //game.batch.draw(slingRight, 640f-50f, 635f-45 1f, 36f, 200f);
-        //game.batch.draw(slingLeft, 640f-50f-32f, 635f-451f+200f-115f, 42f, 124f);
 
         game.batch.draw(sling,200f,635f-455f,92f,170f);
 
         //((AngryObject)redBird).render(game.batch);
         hwood.render(game.batch);
-        vglass.render(game.batch);
-        hstone.render(game.batch);
-        chuck.render(game.batch);
-        terence.render(game.batch);
-        pigga.render(game.batch);
-        mustPig.render(game.batch);
-        kingPig.render(game.batch);
+        vglass1.render(game.batch);
+        vglass2.render(game.batch);
+        //hstone.render(game.batch);
+        redBird2.render(game.batch);
+//        terence.render(game.batch);
+        pigga1.render(game.batch);
+        pigga2.render(game.batch);
+//        mustPig.render(game.batch);
+//        kingPig.render(game.batch);
         redBird.render(game.batch);
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
         font.draw(game.batch, "nicer", 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);
+
         //change to pauseButton2 if hover
-        //float birdRadius = 5f;
-        //Vector2 touchPoint = new Vector2(Gdx.input.getX(), 720 - Gdx.input.getY());
-        //System.out.println("BirdQueue size: "+birdQueue.size);
-
-//        int temp=0;
-//        while(temp!=1){
-//            ((birdQueue.first())).body.toString();
-//            redBird.body.toString();
-//            temp++;
-//        }
-//        System.out.println(redBird.body.toString());
-
-
-//        if (Gdx.input.isTouched() && Gdx.input.getX()>200f-180f && Gdx.input.getX()<200f+180f && 720f-Gdx.input.getY()>635f-455f && 720f-Gdx.input.getY()<635f-455f+170f+180f) {
-//
-//            slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), birdQueue.first().body);
-//            slingshot.calculateTrajectory(birdQueue.first().body, 20, game.batch);
-//        }
-//        else if (!Gdx.input.isTouched() && slingshot.isPulled()) {
-//            slingshot.release(birdQueue.first().body);
-//            birdQueue.first().body.setGravityScale(1);
-//            birdQueue.removeFirst();
-//            if (!birdQueue.isEmpty() && birdQueue.first().body.getLinearVelocity().isZero()) {
-//                Bird nextBird = birdQueue.first();
-//                slingshot.animateBirdToPosition(nextBird, slingshot.getAnchorPoint(), 1); // 1 second duration
-//                birdQueue.removeFirst();
-//            }
-//        }
-
-
-
         if (!birdQueue.isEmpty()) {
             if (Gdx.input.isTouched() && Gdx.input.getX() > 200f - 180f && Gdx.input.getX() < 200f + 180f && 720f - Gdx.input.getY() > 635f - 455f && 720f - Gdx.input.getY() < 635f - 455f + 170f + 180f) {
                 slingshot.pull(Gdx.input.getX(), 720 - Gdx.input.getY(), birdQueue.first().body);
@@ -219,7 +174,7 @@ public class Level1Screen extends LevelScreen implements Screen {
                 birdQueue.first().isReleased=1;
                 birdQueue.first().body.setGravityScale(1);
                 //birdQueue.removeFirst();
-                started = true;
+                super.started = true;
             }
         }
 
@@ -277,24 +232,4 @@ public class Level1Screen extends LevelScreen implements Screen {
 //        box2ddebugrenderer.dispose();
     }
 
-//    private void createGroundBody() {
-//        ground = new Texture("groundl1.png");
-//        BodyDef groundBodyDef = new BodyDef();
-//        groundBodyDef.position.set(0, -450f);
-//        groundBodyDef.type = BodyDef.BodyType.StaticBody;
-//
-//        Body groundBody = world.createBody(groundBodyDef);
-//
-//        PolygonShape groundBox = new PolygonShape();
-//        groundBox.setAsBox(1280f, 635f);
-//
-//        FixtureDef fixtureDef = new FixtureDef();
-//        fixtureDef.shape = groundBox;
-//        fixtureDef.density = 0.0f;
-//        fixtureDef.friction = 0.5f;
-//        fixtureDef.restitution = 0.2f;
-//
-//        groundBody.createFixture(fixtureDef);
-//        groundBox.dispose();
-//    }
 }

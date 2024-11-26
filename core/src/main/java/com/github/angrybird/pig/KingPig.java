@@ -8,7 +8,7 @@ public class KingPig extends Pig{
 
     public KingPig(World world, float x, float y){
         super();
-        health = 100;
+        health = 300;
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         fixture = new FixtureDef();

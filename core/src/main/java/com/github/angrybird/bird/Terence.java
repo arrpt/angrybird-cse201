@@ -8,7 +8,7 @@ public class Terence extends Bird {
 
     public Terence(World world, float x, float y){
         super();
-        super.health = 100;
+        super.health = 300;
         super.bodyDef = new BodyDef();
         super.bodyDef.type = BodyDef.BodyType.DynamicBody;
         super.fixture = new FixtureDef();

@@ -14,6 +14,7 @@ public class MustPig extends Pig {
         fixture = new FixtureDef();
         texture = new Texture("mustpig1.png");
         textureRegion = new TextureRegion(texture);
+        score = 80;
         createBody(world, x, y);
     }
 
@@ -47,7 +48,6 @@ public class MustPig extends Pig {
             1/3f, 1/3f,
             (float) Math.toDegrees(body.getAngle()));
     }
-
 
 //    public void setGravityScale(float gravityScale){
 //        body.setGravityScale(gravityScale);

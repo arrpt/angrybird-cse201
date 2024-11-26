@@ -26,6 +26,7 @@ public class Level2Screen extends LevelScreen implements Screen {
 
     //Main game;
     //public boolean started = false;
+
     private Texture sky;
     private Ground ground;
     private Texture pauseButton;
@@ -72,6 +73,7 @@ public class Level2Screen extends LevelScreen implements Screen {
         if(initialized){
             return;
         }
+        pigsnumber = 3;
         world = new World(new Vector2(0, -9.8f), true);
         world.setContactListener(new GameContactListener(world, removeBody, this));
         //box2ddebugrenderer = new Box2DDebugRenderer();
@@ -171,8 +173,16 @@ public class Level2Screen extends LevelScreen implements Screen {
 //        kingPig.render(game.batch);
         redBird.render(game.batch);
         //game.batch.draw(grass, 0, 635f-455f, 1280f, 50f);
-        font.draw(game.batch, "nicer", 10, 710);
+        font.draw(game.batch, "Score: "+Integer.toString(points*100), 10, 710);
         font.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 300, 710);
+
+
+        if (pigsnumber != 0 && birdQueue.isEmpty()) {
+            game.setScreen(new LoseScreen(game, this));
+        }
+        if (pigsnumber == 0) {
+            game.setScreen(new WinScreen(game, this));
+        }
 
         //change to pauseButton2 if hover
         if (!birdQueue.isEmpty()) {
@@ -188,12 +198,14 @@ public class Level2Screen extends LevelScreen implements Screen {
             }
         }
 
-        if (!birdQueue.isEmpty() && birdQueue.first().body.getLinearVelocity().x==0.0f && birdQueue.first().body.getLinearVelocity().y==0.0f  && birdQueue.first().isReleased==1) {
-
-            birdQueue.removeFirst();
-            Bird nextBird = birdQueue.first();
-            slingshot.animateBirdToPosition(nextBird, slingshot.getAnchorPoint(), 1); // 1 second duration
-//            birdQueue.removeFirst();
+        if (!birdQueue.isEmpty()) {
+            if (birdQueue.first().body.getLinearVelocity().x == 0.0f && birdQueue.first().body.getLinearVelocity().y == 0.0f && birdQueue.first().isReleased == 1) {
+                birdQueue.removeFirst();
+                if (!birdQueue.isEmpty()) {
+                    Bird nextBird = birdQueue.first();
+                    slingshot.animateBirdToPosition(nextBird, slingshot.getAnchorPoint(), 1); // 1 second duration
+                }
+            }
         }
 
 

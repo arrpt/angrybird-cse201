@@ -14,6 +14,7 @@ public abstract class Pig extends AngryObject {
     public FixtureDef fixture;
     public Texture texture;
     public TextureRegion textureRegion;
+    public int score;
 
     public Pig() {
         super();

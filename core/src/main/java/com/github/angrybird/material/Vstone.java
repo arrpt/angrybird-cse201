@@ -14,6 +14,7 @@ public class Vstone extends Material {
         fixture = new FixtureDef();
         texture = new Texture("vstone1.png");
         textureRegion = new TextureRegion(texture);
+        score = 40;
         createBody(world, x, y);
     }
 

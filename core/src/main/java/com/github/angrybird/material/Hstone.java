@@ -14,7 +14,7 @@ public class Hstone extends Material{
         fixture = new FixtureDef();
         texture = new Texture("hstone1.png");
         textureRegion = new TextureRegion(texture);
-
+        score = 40;
         createBody(world, x, y);
     }
 

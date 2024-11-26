@@ -64,9 +64,16 @@ public class PauseScreen implements Screen {
                 //if called from level 1 change to level1screen
                 //if called from level 2 change to level2screen
                 //
+                if (levelScreen instanceof Level1Screen){
+                    game.setScreen(new Level1Screen(game));
 
+                } else if (levelScreen instanceof Level2Screen){
+                    game.setScreen(new Level2Screen(game));
 
-                game.setScreen(new Level1Screen(game));
+                } else if (levelScreen instanceof Level3Screen){
+                    game.setScreen(new Level3Screen(game));
+
+                }
                 dispose();
             }
         }

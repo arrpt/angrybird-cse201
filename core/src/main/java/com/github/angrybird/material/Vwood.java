@@ -14,6 +14,7 @@ public class Vwood extends Material {
         fixture = new FixtureDef();
         texture = new Texture("vwood1.png");
         textureRegion = new TextureRegion(texture);
+        score = 20;
         createBody(world, x, y);
     }
 

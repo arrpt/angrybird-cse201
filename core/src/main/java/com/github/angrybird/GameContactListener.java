@@ -35,6 +35,7 @@ public class GameContactListener implements ContactListener {
                 bird.health -= min(bird.health, material.health);
                 if (material.health == 0) {
                     removeBody.addLast(material.body);
+                    screen.points += material.score;
                     material.isVisible = 0;
                 }
 
@@ -48,6 +49,8 @@ public class GameContactListener implements ContactListener {
                 bird.health -= min(bird.health, pig.health);
                 if (pig.health == 0) {
                     removeBody.addLast(pig.body);
+                    screen.points += pig.score;
+                    screen.pigsnumber--;
                     pig.isVisible = 0;
                 }
             }
@@ -60,10 +63,12 @@ public class GameContactListener implements ContactListener {
                 materialB.health -= min(materialA.health, materialB.health)/100;
                 if (materialA.health == 0) {
                     removeBody.addLast(materialA.body);
+                    screen.points += materialA.score;
                     materialA.isVisible = 0;
                 }
                 if (materialB.health == 0) {
                     removeBody.addLast(materialB.body);
+                    screen.points += materialB.score;
                     materialB.isVisible = 0;
                 }
             }
@@ -76,10 +81,14 @@ public class GameContactListener implements ContactListener {
                 pigB.health -= min(pigA.health, pigB.health);
                 if (pigA.health == 0) {
                     removeBody.addLast(pigA.body);
+                    screen.points += pigA.score;
+                    screen.pigsnumber--;
                     pigA.isVisible = 0;
                 }
                 if (pigB.health == 0) {
                     removeBody.addLast(pigB.body);
+                    screen.points += pigB.score;
+                    screen.pigsnumber--;
                     pigB.isVisible = 0;
                 }
             }
@@ -92,10 +101,13 @@ public class GameContactListener implements ContactListener {
                 pig.health -= min(pig.health, material.health);
                 if (material.health == 0) {
                     removeBody.addLast(material.body);
+                    screen.points += material.score;
                     material.isVisible = 0;
                 }
                 if (pig.health == 0) {
                     removeBody.addLast(pig.body);
+                    screen.points += pig.score;
+                    screen.pigsnumber--;
                     pig.isVisible = 0;
                 }
             }
@@ -116,6 +128,8 @@ public class GameContactListener implements ContactListener {
                 pig.health--;
                 if (pig.health == 0) {
                     removeBody.addLast(pig.body);
+                    screen.points += pig.score;
+                    screen.pigsnumber--;
                     pig.isVisible = 0;
                 }
             }

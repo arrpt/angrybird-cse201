@@ -14,6 +14,7 @@ public class Hglass extends Material {
         fixture = new FixtureDef();
         texture = new Texture("hglass1.png");
         textureRegion = new TextureRegion(texture);
+        score = 10;
         createBody(world, x, y);
     }
 

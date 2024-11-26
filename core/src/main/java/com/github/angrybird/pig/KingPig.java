@@ -14,6 +14,7 @@ public class KingPig extends Pig{
         fixture = new FixtureDef();
         texture = new Texture("kingpig1.png");
         textureRegion = new TextureRegion(texture);
+        score = 160;
         createBody(world, x, y);
     }
 

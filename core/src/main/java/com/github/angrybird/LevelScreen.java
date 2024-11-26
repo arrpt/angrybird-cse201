@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 public class LevelScreen implements Screen {
     public boolean started;
     Main game;
+    public int points;
+    public int pigsnumber;
 
     public LevelScreen(Main game){
         this.game = game;

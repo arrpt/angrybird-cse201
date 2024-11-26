@@ -14,6 +14,7 @@ public class Pigga extends Pig{
         fixture = new FixtureDef();
         texture = new Texture("pig1.png");
         textureRegion = new TextureRegion(texture);
+        score = 40;
         createBody(world, x, y);
     }
 

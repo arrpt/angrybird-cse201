@@ -14,6 +14,7 @@ public class Hwood extends Material {
         fixture = new FixtureDef();
         texture = new Texture("hwood1.png");
         textureRegion = new TextureRegion(texture);
+        score = 20;
         createBody(world, x, y);
     }
 

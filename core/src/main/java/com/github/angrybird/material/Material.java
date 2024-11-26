@@ -12,6 +12,7 @@ public abstract class Material extends AngryObject {
     public FixtureDef fixture;
     public Texture texture;
     public TextureRegion textureRegion;
+    public int score;
 
     public Material() {
         super();

@@ -44,6 +44,7 @@ public class Level2Screen extends LevelScreen implements Screen {
     private Hwood hwood;
     private Vglass vglass1;
     private Vglass vglass2;
+    private Vglass vglass3;
     private Vwood vwood1;
     private Vwood vwood2;
     private Hglass hglass1;
@@ -107,18 +108,19 @@ public class Level2Screen extends LevelScreen implements Screen {
 //        terence = new Terence(world, 200f - 150f, 635f-455f+130f);
 
         //materials
-        hwood = new Hwood(world, 800f, 635f-455f+212f+22f);
+        hwood = new Hwood(world, 800f, 635f-455f+212f+150f+100f);
         vglass1 = new Vglass(world, 800f-106f+11f, 635f-455f+106f);
         vglass2= new Vglass(world, 800f+106f-11f, 635f-455f+106f);
-        vwood1 = new Vwood(world, 800f-106f+11f, 635f-455f+212f+22f);
-        vwood2 = new Vwood(world, 800f+106f-11f, 635f-455f+212f+22f);
-        hglass1 = new Hglass(world, 800f, 635f-455f+212f+22f+212f);
+        //vglass3= new Vglass(world, 800f, 635f-455f+106f);
+        vwood1 = new Vwood(world, 800f-106f+13f, 635f-455f+212f+150f);
+        vwood2 = new Vwood(world, 800f+106f-13f, 635f-455f+212f+150f);
+        hglass1 = new Hglass(world,800f, 635f-455f+212f );
         //hstone = new Hstone(world, 800f, 635f-455f+212f+22f);
 
         //pigs
         pigga1 = new Pigga(world, 800, 635f-455f+130f);
         pigga2 = new Pigga(world, 800f, 635f-455f+212f+100f);
-        mustPig = new MustPig(world, 200f+400f, 635f-455f+130f);
+        mustPig = new MustPig(world, 800f, 690f);
 //        kingPig = new KingPig(world, 200f+450f, 635f-455f+130f);
 //        box2ddebugrenderer = new Box2DDebugRenderer();
 
@@ -156,6 +158,7 @@ public class Level2Screen extends LevelScreen implements Screen {
         hwood.render(game.batch);
         vglass1.render(game.batch);
         vglass2.render(game.batch);
+        //vglass3.render(game.batch);
         vwood1.render(game.batch);
         vwood2.render(game.batch);
         hglass1.render(game.batch);

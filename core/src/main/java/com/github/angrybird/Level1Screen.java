@@ -106,7 +106,7 @@ public class Level1Screen extends LevelScreen implements Screen {
 //        terence = new Terence(world, 200f - 150f, 635f-455f+130f);
 
         //materials
-        hwood = new Hwood(world, 800f, 635f-455f+212f+95f);
+        hwood = new Hwood(world, 800f, 635f-455f+212f);
         vglass1 = new Vglass(world, 800f-106f+11f, 635f-455f+106f);
         vglass2= new Vglass(world, 800f+106f-11f, 635f-455f+106f);
         //hstone = new Hstone(world, 800f, 635f-455f+212f+22f);

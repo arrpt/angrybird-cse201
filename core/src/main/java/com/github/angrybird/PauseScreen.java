@@ -61,6 +61,11 @@ public class PauseScreen implements Screen {
         if(Gdx.input.getX()>640f-(376/2f)+86f+90f+60f && Gdx.input.getX()<640f-(376/2f)+86f+90f+60f+86f && 720f-Gdx.input.getY()>360f-(376f/2f)+(155f) && 720f-Gdx.input.getY()<360f-(376f/2f)+(155f)+86f){
             game.batch.draw(restart2,640f-(376/2f)+86f+90f+60f, 360f-(376f/2f)+(155f),86f,86f);
             if(Gdx.input.isTouched()){
+                //if called from level 1 change to level1screen
+                //if called from level 2 change to level2screen
+                //
+
+
                 game.setScreen(new Level1Screen(game));
                 dispose();
             }

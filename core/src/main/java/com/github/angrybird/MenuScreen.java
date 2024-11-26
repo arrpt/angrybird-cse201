@@ -59,6 +59,14 @@ public class MenuScreen implements Screen {
             }
         }
 
+        //change to level 3 if clicked on level3 button
+        if(Gdx.input.getX()>850f && Gdx.input.getX()<1070f && 720f-Gdx.input.getY()>250f && 720f-Gdx.input.getY()<470f) {
+            if (Gdx.input.isTouched()) {
+                game.setScreen(new Level3Screen(game));
+                dispose();
+            }
+        }
+
 
         game.batch.end();
     }

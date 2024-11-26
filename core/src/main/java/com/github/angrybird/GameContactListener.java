@@ -56,8 +56,8 @@ public class GameContactListener implements ContactListener {
             if ((userDataA instanceof Material && userDataB instanceof Material)) {
                 Material materialA = (Material) (userDataA);
                 Material materialB = (Material) (userDataB);
-                materialA.health -= min(materialA.health, materialB.health);
-                materialB.health -= min(materialA.health, materialB.health);
+                materialA.health -= min(materialA.health, materialB.health)/100;
+                materialB.health -= min(materialA.health, materialB.health)/100;
                 if (materialA.health == 0) {
                     removeBody.addLast(materialA.body);
                     materialA.isVisible = 0;

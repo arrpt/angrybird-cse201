@@ -7,10 +7,13 @@ public class LevelScreen implements Screen {
     Main game;
     public int points;
     public int pigsnumber;
+    public LevelStatusManager levelStatusManager;
 
     public LevelScreen(Main game){
         this.game = game;
         this.started = false;
+        this.levelStatusManager = new LevelStatusManager();
+        this.points = 0;
     }
 
     @Override

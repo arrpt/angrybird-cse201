@@ -18,12 +18,17 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class Main extends Game {
     public SpriteBatch batch;
     public Music bgmusic;
+    LevelStatusManager levelStatusManager;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         bgmusic = Gdx.audio.newMusic(Gdx.files.internal("intro2.mp3"));
         bgmusic.play();
+        levelStatusManager = new LevelStatusManager();
+        //levelStatusManager.setLevelStatus("level1", "fail");
+        //levelStatusManager.setLevelStatus("level2", "fail");
+        //levelStatusManager.setLevelStatus("level3", "fail");
         this.setScreen(new StartupScreen(this));
     }
 

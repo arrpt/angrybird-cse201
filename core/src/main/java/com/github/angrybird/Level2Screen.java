@@ -181,6 +181,7 @@ public class Level2Screen extends LevelScreen implements Screen {
             game.setScreen(new LoseScreen(game, this));
         }
         if (pigsnumber == 0) {
+            levelStatusManager.setLevelStatus("level2", "pass");
             game.setScreen(new WinScreen(game, this));
         }
 

@@ -13,10 +13,12 @@ public class WinScreen implements Screen {
     Texture texture;
     private Texture home1;
     private Texture home2;
+    LevelStatusManager levelStatusManager;
 
     public WinScreen(Main game, LevelScreen levelScreen){
         this.game = game;
         this.levelScreen = levelScreen;
+        this.levelStatusManager = new LevelStatusManager();
 
     }
 

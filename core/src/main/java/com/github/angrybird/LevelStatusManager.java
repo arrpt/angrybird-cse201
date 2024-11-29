@@ -15,7 +15,7 @@ public class LevelStatusManager {
     //public LevelStatusManager db;
 
     public LevelStatusManager(Main game) {
-        loadStatus();
+        //loadStatus();
         if (levelStatus == null) {
             levelStatus = new HashMap<>();
         }
@@ -67,16 +67,16 @@ public class LevelStatusManager {
         }
     }
 
-    private void loadStatus() {
-        File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            saveStatus(); // Create the file if it does not exist
-        } else {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
-                this.db = (LevelStatusManager) ois.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private void loadStatus() {
+//        File file = new File(FILE_PATH);
+//        if (!file.exists()) {
+//            saveStatus(); // Create the file if it does not exist
+//        } else {
+//            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+//                this.db = (LevelStatusManager) ois.readObject();
+//            } catch (IOException | ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

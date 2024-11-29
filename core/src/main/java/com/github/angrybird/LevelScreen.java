@@ -12,7 +12,7 @@ public class LevelScreen implements Screen {
     public LevelScreen(Main game){
         this.game = game;
         this.started = false;
-        this.levelStatusManager = new LevelStatusManager();
+        this.levelStatusManager = new LevelStatusManager(game);
         this.points = 0;
     }
 

@@ -14,18 +14,36 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import static com.github.angrybird.LevelStatusManager.FILE_PATH;
+
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
     public SpriteBatch batch;
     public Music bgmusic;
-    LevelStatusManager levelStatusManager;
+    public static LevelStatusManager levelStatusManager;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         bgmusic = Gdx.audio.newMusic(Gdx.files.internal("intro2.mp3"));
         bgmusic.play();
-        levelStatusManager = new LevelStatusManager();
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            levelStatusManager = new LevelStatusManager(this);
+            levelStatusManager.saveStatus();
+        } else {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+                levelStatusManager = (LevelStatusManager) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        //levelStatusManager = new LevelStatusManager(this);
         //levelStatusManager.setLevelStatus("level1", "fail");
         //levelStatusManager.setLevelStatus("level2", "fail");
         //levelStatusManager.setLevelStatus("level3", "fail");

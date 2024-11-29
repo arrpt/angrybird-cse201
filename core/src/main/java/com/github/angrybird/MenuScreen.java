@@ -32,7 +32,7 @@ public class MenuScreen implements Screen {
         level2 = new Texture("level2.png");
         level3= new Texture("level3.png");
         textLogo = new Texture("textLogo.png");
-        levelStatusManager = new LevelStatusManager();
+        levelStatusManager = Main.levelStatusManager;
     }
 
     @Override

@@ -18,8 +18,6 @@ public class WinScreen implements Screen {
     public WinScreen(Main game, LevelScreen levelScreen){
         this.game = game;
         this.levelScreen = levelScreen;
-        this.levelStatusManager = new LevelStatusManager();
-
     }
 
     @Override

@@ -133,7 +133,7 @@ public class Level2Screen extends LevelScreen implements Screen {
         birdQueue.addLast(chuck);
 //        birdQueue.addLast(terence);
         initialized=true;
-        System.out.println("Size: "+birdQueue.size);
+        //System.out.println("Size: "+birdQueue.size);
 
 
     }

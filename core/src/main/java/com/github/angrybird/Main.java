@@ -14,15 +14,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 import static com.github.angrybird.LevelStatusManager.FILE_PATH;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends Game {
+public class Main extends Game implements Serializable {
     public SpriteBatch batch;
     public Music bgmusic;
     public static LevelStatusManager levelStatusManager;

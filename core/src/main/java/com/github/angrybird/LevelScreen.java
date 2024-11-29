@@ -2,7 +2,9 @@ package com.github.angrybird;
 
 import com.badlogic.gdx.Screen;
 
-public class LevelScreen implements Screen {
+import java.io.Serializable;
+
+public class LevelScreen implements Screen , Serializable {
     public boolean started;
     Main game;
     public int points;

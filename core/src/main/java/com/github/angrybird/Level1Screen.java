@@ -22,9 +22,10 @@ import com.github.angrybird.pig.KingPig;
 import com.github.angrybird.pig.MustPig;
 import com.github.angrybird.pig.Pigga;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Level1Screen extends LevelScreen implements Screen {
+public class Level1Screen extends LevelScreen implements Screen, Serializable {
 
     //Main game;
     //public boolean started = false;

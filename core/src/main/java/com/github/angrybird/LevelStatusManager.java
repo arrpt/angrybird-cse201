@@ -6,12 +6,13 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LevelStatusManager {
+public class LevelStatusManager implements Serializable {
+    private static final long serialVersionUID = 1L;
     public static final String FILE_PATH = "level_status.ser";
-    public static Map<String, String> levelStatus;
-    public static Level1Screen level1screen;
-    public static Level2Screen level2screen;
-    public static Level3Screen level3screen;
+    public Map<String, String> levelStatus;
+    public transient Level1Screen level1screen;
+    public transient Level2Screen level2screen;
+    public transient Level3Screen level3screen;
     //public LevelStatusManager db;
 
     public LevelStatusManager(Main game) {
@@ -24,28 +25,37 @@ public class LevelStatusManager {
             levelStatus.put("level2", "not_started");
             levelStatus.put("level3", "not_started");
         }
-        if (level1screen == null){
-            level1screen = new Level1Screen(game);
-        }
-        if (level2screen == null){
-            level2screen = new Level2Screen(game);
-        }
-        if (level3screen == null){
-            level3screen = new Level3Screen(game);
-        }
+//        if (level1screen == null){
+//            level1screen = new Level1Screen(game);
+//        }
+//        if (level2screen == null){
+//            level2screen = new Level2Screen(game);
+//        }
+//        if (level3screen == null){
+//            level3screen = new Level3Screen(game);
+//        }
     }
 
     public Level1Screen getLevel1Screen(Main game){
+        if (level1screen == null) {
+            level1screen = new Level1Screen(game);
+        }
         level1screen.game = game;
         return level1screen;
     }
 
     public Level2Screen getLevel2Screen(Main game){
+        if (level2screen == null) {
+            level2screen = new Level2Screen(game);
+        }
         level2screen.game = game;
         return level2screen;
     }
 
     public Level3Screen getLevel3Screen(Main game){
+        if (level3screen == null) {
+            level3screen = new Level3Screen(game);
+        }
         level3screen.game = game;
         return level3screen;
     }
@@ -66,6 +76,17 @@ public class LevelStatusManager {
             e.printStackTrace();
         }
     }
+
+//    private void loadStatus() {
+//        File file = new File(FILE_PATH);
+//        if (file.exists()) {
+//            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+//                levelStatus = (Map<String, String>) ois.readObject();
+//            } catch (IOException | ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 //    private void loadStatus() {
 //        File file = new File(FILE_PATH);

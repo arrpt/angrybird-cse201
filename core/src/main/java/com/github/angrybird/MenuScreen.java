@@ -72,7 +72,8 @@ public class MenuScreen implements Screen {
         if (!"pass".equals(levelStatusManager.getLevelStatus("level1"))) {
             if (Gdx.input.getX() > 210f && Gdx.input.getX() < 430f && 720f - Gdx.input.getY() > 250f && 720f - Gdx.input.getY() < 470f) {
                 if (Gdx.input.isTouched()) {
-                    game.setScreen(new Level1Screen(game));
+                    //game.setScreen(new Level1Screen(game));
+                    game.setScreen(levelStatusManager.getLevel1Screen(game));
                     dispose();
                 }
             }
@@ -82,7 +83,8 @@ public class MenuScreen implements Screen {
         if (!"pass".equals(levelStatusManager.getLevelStatus("level2"))) {
             if (Gdx.input.getX() > 530f && Gdx.input.getX() < 750f && 720f - Gdx.input.getY() > 250f && 720f - Gdx.input.getY() < 470f) {
                 if (Gdx.input.isTouched()) {
-                    game.setScreen(new Level2Screen(game));
+                    //game.setScreen(new Level2Screen(game));
+                    game.setScreen(levelStatusManager.getLevel2Screen(game));
                     dispose();
                 }
             }
@@ -92,7 +94,8 @@ public class MenuScreen implements Screen {
         if (!"pass".equals(levelStatusManager.getLevelStatus("level3"))) {
             if (Gdx.input.getX() > 850f && Gdx.input.getX() < 1070f && 720f - Gdx.input.getY() > 250f && 720f - Gdx.input.getY() < 470f) {
                 if (Gdx.input.isTouched()) {
-                    game.setScreen(new Level3Screen(game));
+                    //game.setScreen(new Level3Screen(game));
+                    game.setScreen(levelStatusManager.getLevel3Screen(game));
                     dispose();
                 }
             }
